@@ -44,7 +44,7 @@
         "comma-spacing": "warn",
         "no-iterator": "error",
         "dot-notation": "warn",
-        "one-var": "error",
+        "one-var": ["error", "never"],
         "no-multi-assign": "error",
         "no-plusplus": "error",
         "eqeqeq": ["error", "always", {"null": "ignore"}], // or use smart
@@ -64,7 +64,7 @@
         "no-whitespace-before-property": "warn",
         "space-in-parens": "error",
         "array-bracket-spacing": "error",
-        "object-curly-spacing": "error",
+        "object-curly-spacing": ["error", "always"],
         "max-len": "error",
         "semi": "error",
         "no-new-wrappers": "error",
@@ -72,7 +72,7 @@
         "id-length": "warn", // actually i may want to remove it
         "camelcase": "error",
         /*new-cap:error*/
-        "no-underscore-dangle": "warn",
+        "no-underscore-dangle": "warn"
         /* no-restricted-globals */
     }
 }
