@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "a web based blood bank management system for ease of information access to the end user and a portal for communication between blood donors and blood banks",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"

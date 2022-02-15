@@ -1,6 +1,6 @@
-const { createServer } = require('http');
-const { PORT } = require('./config');
-const { renderFile: ejsRender } = require('ejs');
+import { createServer } from 'http';
+import { PORT } from './config.js';
+import { renderFile as ejsRender } from 'ejs';
 
 const server = createServer(async (req, res) => {
   const { url } = req;
