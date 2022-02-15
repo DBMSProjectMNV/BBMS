@@ -10,7 +10,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "ejs": "^3.1.6",
-    "mysql": "^2.18.1"
+    "mysql2": "^2.3.3"
   },
   "devDependencies": {
     "eslint": "^8.8.0"
