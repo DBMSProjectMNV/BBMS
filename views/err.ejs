@@ -11,5 +11,11 @@
             <p>Error code: <%= code; %></p>
             <p>Description: <%= desc; %></p>
         </div>
+        <% if (locals.stack) { %>
+          <div class="stack">
+            <p>Stack trace:</p>
+            <pre><%= stack %></pre>
+          </div>
+        <% } %>
     </body>
 </html>

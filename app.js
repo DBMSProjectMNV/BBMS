@@ -2,6 +2,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import session from 'cookie-session';
 import flash from 'connect-flash';
+import passport from './middlewares/passport.js';
 import router from './routes/index.js';
 import { PORT, SECRET } from './config.js';
 
@@ -21,6 +22,8 @@ app.use(session({
   maxAge: 30 * 60
 }));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static('./public'));
 
 app.all('/', (req, res) => {
@@ -31,8 +34,7 @@ app.use('/', router);
 // url not found
 app.use((req, res) => {
   res.status(404);
-  res.render('404', { url: `${req.headers.host}${req.url}` });
-/*  res.format({
+  res.format({
     html () {
       res.render('404', { url: `${req.headers.host}${req.url}` });
     },
@@ -42,17 +44,20 @@ app.use((req, res) => {
     default () {
       res.type('txt').send('Error (404): File not found');
     }
-  }); */
+  });
 });
 
 // error handling middleware
-// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
   res.status(err.code || 500);
   res.render('err', {
-    code: err.code || 500,
-    desc: err.desc || 'Internal server error',
-    url: `${req.headers.host}${req.url}`
+    code: err.code || err.statusCode || 500,
+    desc: err.desc || err.statusMessage || 'Internal server error',
+    url: `${req.headers.host}${req.url}`,
+    stack: err.stack
   });
   console.log(err.content || err);
   next();

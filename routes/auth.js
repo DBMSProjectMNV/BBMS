@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import passport from '../middlewares/passport.js';
 const router = Router();
 
 router.get('/', (req, res) => {
@@ -18,8 +19,15 @@ router.get('/error', (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
+  req.logout();
   req.flash('success', 'Logout successful');
   res.redirect('/auth/login');
 });
+
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/auth/login',
+  failureFlash: true
+}));
 
 export default router;
