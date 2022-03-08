@@ -1,0 +1,204 @@
+:root{
+  --primary-clr: 60e;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  min-width: 100vw;
+  height: max(100vh, 100%);
+}
+label.invalid {
+  --validity-clr: #f00;
+}
+label.valid {
+  --validity-clr: #0a3;
+}
+.error {
+  color: red;
+}
+span.good {
+  color: green;
+}
+body {
+  margin: 0;
+  padding: 1em;
+  height: 100%;
+  background-color: #f7f7f7;
+}
+.center {
+  text-align: center;
+}
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+}
+form {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 1em;
+  border-radius: 5%;
+  box-shadow: 0 5px 8px #aaa;
+  width: min(450px, 100%);
+}
+form > div {
+  padding: 0.5em;
+}
+textarea {
+  overflow-wrap: break-word;
+  resize: vertical;
+  min-height: 3.5em;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.field label {
+  position: relative;
+  display: block;
+  width: 80%;
+}
+.field p {
+  margin: 0.2em;
+  width: 80%;
+}
+.field label span, .field label input, .field label textarea {
+  font-family: Serif;
+  font-size: 1em;
+}
+.field input, .field textarea {
+  background-color: transparent;
+  border: 1px inset var(--validity-clr, #aaa);
+  border-radius: 0.5em;
+  padding: 1em;
+  background-color: #fff;
+  width: 100%;
+}
+.field input:hover, .field textarea:hover {
+  outline: 1px solid var(--validity-clr, #333);
+}
+.field input:focus, .field textarea:focus {
+  outline: 1px solid var(--validity-clr, #60e);
+}
+.field p {
+  display: flex;
+}
+.field p span {
+  margin-left: 1em;
+}
+.field p span + span {
+  margin-left: auto;
+}
+.field label span {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  transition: all 0.2s ease;
+  opacity: 0;
+  padding: 0.35em;
+}
+.field input:not(:placeholder-shown) + span, .field textarea:not(:placeholder-shown) + span {
+  top: 0;
+  left: 0;
+  margin-top: -1em;
+  margin-left: 0.8em;
+  background-color: #fff;
+  z-index: 2;
+  opacity: 1;
+}
+label.invalid::after, label.valid::after {
+  display: inline-block;
+  font-size: 1.5em;
+  position: absolute;
+  right: 0;
+  top: 0.5em;
+  margin-right: -1em;
+  color: var(--validity-clr, #333);
+}
+label.valid::after {
+  content: "✔";
+}
+label.invalid::after {
+  content: "✗";
+}
+button {
+  cursor: pointer;
+}
+.button {
+  color: #fff;
+  background-color: #60e;
+  padding: 0.5em 1em;
+  font-size: 1.2rem;
+  border-radius: 0.5em;
+  border: none;
+}
+.field .button {
+  margin: 0.5em;
+}
+.button:hover {
+  outline: 1px solid #cbf;
+}
+.button:focus {
+  box-shadow: 0 0 5px 2px #cae;
+  outline: 1px solid #60e;
+}
+.btn-close {
+  border: 0;
+  position: absolute;
+  top: 0.5rem;
+  right: 0;
+  z-index: 2;
+  padding: 1.25rem 1rem;
+  width: 1em;
+  height: 1em;
+  color: #000;
+  background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+  border-radius: .25rem;
+  opacity: .5;
+}
+.btn-close:hover {
+  opacity: 1;
+}
+.field label i {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  background-size: cover;
+}
+i.suffix {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  cursor: pointer;
+}
+i.eye {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktZXllLWZpbGwiIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZD0iTTEwLjUgOGEyLjUgMi41IDAgMSAxLTUgMCAyLjUgMi41IDAgMCAxIDUgMHoiLz4KICA8cGF0aCBkPSJNMCA4czMtNS41IDgtNS41UzE2IDggMTYgOHMtMyA1LjUtOCA1LjVTMCA4IDAgOHptOCAzLjVhMy41IDMuNSAwIDEgMCAwLTcgMy41IDMuNSAwIDAgMCAwIDd6Ii8+Cjwvc3ZnPg==);
+}
+i.eye-slash {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktZXllLXNsYXNoLWZpbGwiIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZD0ibTEwLjc5IDEyLjkxMi0xLjYxNC0xLjYxNWEzLjUgMy41IDAgMCAxLTQuNDc0LTQuNDc0bC0yLjA2LTIuMDZDLjkzOCA2LjI3OCAwIDggMCA4czMgNS41IDggNS41YTcuMDI5IDcuMDI5IDAgMCAwIDIuNzktLjU4OHpNNS4yMSAzLjA4OEE3LjAyOCA3LjAyOCAwIDAgMSA4IDIuNWM1IDAgOCA1LjUgOCA1LjVzLS45MzkgMS43MjEtMi42NDEgMy4yMzhsLTIuMDYyLTIuMDYyYTMuNSAzLjUgMCAwIDAtNC40NzQtNC40NzRMNS4yMSAzLjA4OXoiLz4KICA8cGF0aCBkPSJNNS41MjUgNy42NDZhMi41IDIuNSAwIDAgMCAyLjgyOSAyLjgyOWwtMi44My0yLjgyOXptNC45NS43MDgtMi44MjktMi44M2EyLjUgMi41IDAgMCAxIDIuODI5IDIuODI5em0zLjE3MSA2LTEyLTEyIC43MDgtLjcwOCAxMiAxMi0uNzA4LjcwOHoiLz4KPC9zdmc+);
+}
+
+.alert {
+  padding: 0.3rem;
+  padding-right: 3rem;
+  position: relative;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  transition: opacity .15s linear;
+}
+.alert.error {
+  color: #842029;
+  background-color: #f8d7da;
+  border: 1px solid #f5c2c7;
+}
+.alert.success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+}

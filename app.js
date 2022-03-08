@@ -1,22 +1,38 @@
 import express from 'express';
-import { PORT } from './config.js';
+import cookieParser from 'cookie-parser';
+import session from 'cookie-session';
+import flash from 'connect-flash';
+import router from './routes/index.js';
+import { PORT, SECRET } from './config.js';
 
 const app = express();
 
+/* not needed, it is default configuration */
+// view engine setup
+// app.set('views', './views');
 app.set('view engine', 'ejs');
 
-/* not needed, it is default configuration */
-// app.set('views', path.join(__dirname, 'views'));
+// app.use(logger('dev')); // morgan
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session({
+  secret: SECRET,
+  maxAge: 30 * 60
+}));
+app.use(flash());
+app.use(express.static('./public'));
 
 app.all('/', (req, res) => {
   res.render('index');
 });
+app.use('/', router);
 
 // url not found
 app.use((req, res) => {
   res.status(404);
-
-  res.format({
+  res.render('404', { url: `${req.headers.host}${req.url}` });
+/*  res.format({
     html () {
       res.render('404', { url: `${req.headers.host}${req.url}` });
     },
@@ -26,19 +42,19 @@ app.use((req, res) => {
     default () {
       res.type('txt').send('Error (404): File not found');
     }
-  });
+  }); */
 });
 
 // error handling middleware
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
-  res.status(err.code);
+  res.status(err.code || 500);
   res.render('err', {
-    code: err.code,
-    desc: err.desc,
+    code: err.code || 500,
+    desc: err.desc || 'Internal server error',
     url: `${req.headers.host}${req.url}`
   });
-  console.log(err.message);
+  console.log(err.content || err);
   next();
 });
 
