@@ -34,7 +34,7 @@
         <div>
           <div class="field">
             <label>
-              <input type="text" name="username" placeholder="Username" />
+              <input type="text" name="username" placeholder="Username" <%= locals.username && 'value=' + username %> />
               <span>Username:</span>
             </label>
             <p><span class="error"></span></p>
@@ -44,9 +44,9 @@
         <div>
           <div class="field">
             <label>
-              <input type="password" name="password" placeholder="Password" />
-              <span>Password:</span>
               <i class="eye suffix password"></i>
+              <input type="password" name="password" placeholder="Password" <%= locals.password && 'value=' + password %> />
+              <span>Password:</span>
             </label>
             <p><span class="error"></span></p>
             <p><span class="hint"></span></p>

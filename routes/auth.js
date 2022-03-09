@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import passport from '../middlewares/passport.js';
+import validator from '../middlewares/validator.js';
 const router = Router();
 
 router.get('/', (req, res) => {
@@ -9,6 +10,8 @@ router.get('/', (req, res) => {
 router.get('/login', (req, res) => {
   res.locals.error = req.flash('error');
   res.locals.success = req.flash('success');
+  res.locals.username = req.flash('username');
+  res.locals.password = req.flash('password');
   res.render('login.ejs');
 });
 
@@ -24,7 +27,7 @@ router.get('/logout', (req, res) => {
   res.redirect('/auth/login');
 });
 
-router.post('/login', passport.authenticate('local', {
+router.post('/login', validator, passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/auth/login',
   failureFlash: true
