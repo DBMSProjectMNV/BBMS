@@ -44,7 +44,7 @@
         "comma-dangle": ["error", "only-multiline"],
         "comma-spacing": "warn",
         "no-iterator": "error",
-        "dot-notation": "warn",
+        "dot-notation": ["warn", { "allowPattern": "^[a-zA-Z]+(_[a-zA-Z]+)+$" }],
         "one-var": ["error", "never"],
         "no-multi-assign": "error",
         "no-plusplus": "error",

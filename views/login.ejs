@@ -9,7 +9,8 @@
   </head>
   <body>
     <div class="form-container">
-      <form action="/auth/login" method="post">
+      <% const url = locals.redirect ?? ''; %>
+      <form action="<%= '/auth/login?' + url %>" method="post">
         <div>
           <h2 class="center">Login</h2>
         </div>
