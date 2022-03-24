@@ -21,7 +21,7 @@ app.use(session({
   secret: SECRET,
   resave: false,
   saveUninitialized: true,
-  //maxAge: 30 * 60
+  // cookie: { maxAge: 30 * 60 }
 }));
 app.use(flash());
 app.use(passport.initialize());

@@ -30,8 +30,8 @@ CREATE TABLE Suppliers (
 	Supplier_id varchar(10),
 	Supplier_name varchar(50),
 	Supplier_address varchar(50),
-	Supplier_contact_no varchar(10),
-	Supplier_email_id varchar(50),
+	Supplier_contact varchar(10),
+	Supplier_email varchar(50),
 	PRIMARY KEY (Retailer_id, Supplier_id),
 	FOREIGN KEY (Retailer_id) REFERENCES Retailers(Retailer_id)
 );
@@ -52,11 +52,11 @@ CREATE TABLE Orders (
 CREATE TABLE Staffs (
 	Retailer_id varchar(10),
 	Staff_id int,
-	Staff_Name varchar(50),
-	Contact_number bigint,
+	Staff_name varchar(50),
+	Staff_contact bigint,
+	Staff_address varchar(80),
+	Staff_email varchar(50),
 	Job_role varchar(25),
-	Address varchar(80),
-	Email_id varchar(50),
 	Salary decimal(10,2),
 	User_id int,
 	PRIMARY KEY (Retailer_id, Staff_id),

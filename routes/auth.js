@@ -1,14 +1,13 @@
 import { Router } from 'express';
-import { decode } from 'querystring';
 import passport from '../middlewares/passport.js';
 import validator from '../middlewares/validator.js';
 const router = Router();
 
-router.get('/', (req, res) => {
+router.get('/auth/', (req, res) => {
   res.redirect('/auth/login');
 });
 
-router.get('/login', (req, res) => {
+router.get('/auth/login', (req, res) => {
   res.locals.error = req.flash('error');
   res.locals.success = req.flash('success');
   [res.locals.username] = req.flash('username');
@@ -17,20 +16,20 @@ router.get('/login', (req, res) => {
   res.render('login.ejs');
 });
 
-router.get('/error', (req, res) => {
+router.get('/auth/error', (req, res) => {
   req.flash('error', 'Please login to continue');
   req.flash('error', 'Invalid username or password');
   res.redirect('/auth/login');
 });
 
-router.get('/logout', (req, res) => {
+router.get('/auth/logout', (req, res) => {
   req.logout();
   req.flash('success', 'Logout successful');
   res.redirect('/auth/login');
 });
 
 router.post(
-  '/login',
+  '/auth/login',
   validator,
   passport.authenticate('local', {
     /* successRedirect: '/dashboard', */
