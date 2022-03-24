@@ -1,6 +1,6 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import session from 'cookie-session';
+import session from 'express-session';
 import flash from 'connect-flash';
 import passport from './middlewares/passport.js';
 import router from './routes/index.js';
@@ -19,7 +19,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({
   secret: SECRET,
-  maxAge: 30 * 60
+  resave: false,
+  saveUninitialized: true,
+  //maxAge: 30 * 60
 }));
 app.use(flash());
 app.use(passport.initialize());
