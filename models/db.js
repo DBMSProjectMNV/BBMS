@@ -12,9 +12,3 @@ const pool  = mysql.createPool({
 }).promise();
 
 export default pool;
-
-
-/* export default {
-  username: 'owner',
-  password: 'password'
-};*/

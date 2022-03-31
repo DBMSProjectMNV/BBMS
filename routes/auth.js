@@ -8,18 +8,17 @@ router.get('/auth/', (req, res) => {
 });
 
 router.get('/auth/login', (req, res) => {
+  if (req.isAuthenticated()) {
+    const [url] = req.flash('redirect');
+    res.redirect(url ?? '/dashboard');
+    return;
+  }
   res.locals.error = req.flash('error');
   res.locals.success = req.flash('success');
   [res.locals.username] = req.flash('username');
   [res.locals.password] = req.flash('password');
   [res.locals.redirect] = req.flash('redirect');
   res.render('login.ejs');
-});
-
-router.get('/auth/error', (req, res) => {
-  req.flash('error', 'Please login to continue');
-  req.flash('error', 'Invalid username or password');
-  res.redirect('/auth/login');
 });
 
 router.get('/auth/logout', (req, res) => {

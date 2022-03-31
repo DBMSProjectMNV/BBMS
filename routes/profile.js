@@ -10,7 +10,11 @@ router.get(
     userOnly(req.params.name, req, res, next);
   },
   async (req, res) => {
-    res.end(JSON.stringify(await Retailer.find(req.params.name)));
+    res.end(JSON.stringify(
+      await Retailer.find(req.params.name, 'name'),
+      null,
+      4
+    ));
   }
 );
 

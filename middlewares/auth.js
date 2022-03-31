@@ -6,17 +6,13 @@ const Forbidden = {
   content: 'You are not authorized to access this resource'
 };
 
-const loginErr = (req, res) => {
-  req.flash('error', 'Please login to continue');
-  req.flash('redirect', encode({ url:req.url }));
-  res.redirect('/auth/login');
-};
-
 const checkLogin = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {
-    loginErr(req, res);
+    req.flash('error', 'Please login to continue');
+    req.flash('redirect', encode({ url:req.url }));
+    res.redirect('/auth/login');
   }
 };
 
