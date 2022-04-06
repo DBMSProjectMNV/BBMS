@@ -1,0 +1,14 @@
+<%- include('partials/header'); %>
+<title>Forgot password</title>
+<%- include('partials/layout'); %>
+<main>
+  <% if (locals.error) { %>
+    <p>Error: <%= error %></p>
+  <% } else { %>
+    <form action="/auth/forgot" method="post">
+      <p>Hint question: <%= hintq %></p>
+      <input type="hidden" name="hintq" value="<%= hintq %>" />
+      <input type="text" name="ans" />
+    </form>
+  <% } %>
+</main>

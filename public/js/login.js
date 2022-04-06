@@ -35,27 +35,43 @@ function helper (element, validationfn) {
   }
 }
 
-document.querySelector('i.password').addEventListener('click', function () {
-  const attr = this.matches('.eye') ? 'text' : 'password';
-  this.classList.toggle('eye');
-  this.classList.toggle('eye-slash');
-  this.parentElement.querySelector('input').setAttribute('type', attr);
-});
+const toggleForm = () => {
+  const login = document.querySelector('#login').classList;
+  const forgot = document.querySelector('#forgot').classList;
+  login.toggle('hidden');
+  forgot.toggle('hidden');
+};
 
-document.querySelector('input[name="username"]').addEventListener(
-  'change',
-  function () {
+const ipassword = document.querySelector('i.password');
+if (ipassword) {
+  ipassword.addEventListener('click', function () {
+    const attr = this.matches('.eye') ? 'text' : 'password';
+    this.classList.toggle('eye');
+    this.classList.toggle('eye-slash');
+    this.parentElement.querySelector('input').setAttribute('type', attr);
+  });
+}
+const inpUsername = document.querySelector('input[name="username"]');
+if (inpUsername) {
+  inpUsername.addEventListener('change', function () {
     helper(this, validateUsername);
-  }
-);
-
-document.querySelector('input[name="password"]').addEventListener(
-  'change',
-  function () {
-    helper(this, validatePassword);
-  }
-);
-
+  });
+}
+const inpName = document.querySelector('input[name="name"]');
+if (inpName) {
+  inpName.addEventListener('change', function () {
+    helper(this, validateUsername);
+  });
+}
+const inpPassword = document.querySelector('input[name="password"]');
+if (inpPassword) {
+  inpPassword.addEventListener(
+    'change',
+    function () {
+      helper(this, validatePassword);
+    }
+  );
+}
 const hintq = document.querySelector('textarea[name="hintq"]');
 if (hintq) {
   hintq.addEventListener('change', function () {
@@ -64,13 +80,13 @@ if (hintq) {
       if (len === 0) {
         return 'empty';
       }
-      if (len > 25) {
+      if (len > this.getAttribute('maxlength')) {
         return 'too long';
       }
       return false;
     });
   });
-  document.querySelector('textarea[name="ans"]').addEventListener(
+  document.querySelector('textarea[name="answer"]').addEventListener(
     'change',
     function () {
       helper(this, () => {
@@ -78,7 +94,7 @@ if (hintq) {
         if (len === 0) {
           return 'empty';
         }
-        if (len > 15) {
+        if (len > this.getAttribute('maxlength')) {
           return 'too long';
         }
         return false;
@@ -86,10 +102,72 @@ if (hintq) {
     }
   );
 }
+const inpContact = document.querySelector('input[name="contact"]');
+if (inpContact) {
+  inpContact.addEventListener('change', function () {
+    helper(this, () => {
+      const contactno = this.value;
+      const len = contactno.length;
+      if (len === 0) {
+        return 'empty';
+      }
+      if (len !== 10) {
+        return '10 digits';
+      }
+      if (/[^0-9]/.test(contactno)) {
+        return 'only numbers allowed';
+      }
+      return false;
+    });
+  });
+}
+const inpAddress = document.querySelector('textarea[name="address"]');
+if (inpAddress) {
+  inpAddress.addEventListener('change', function () {
+    helper(this, () => {
+      const address = this.value;
+      const len = address.length;
+      if (len === 0) {
+        return 'empty';
+      }
+      if (len > this.getAttribute('maxlength')) {
+        return 'too long';
+      }
+      return false;
+    });
+  });
+}
+const inpEmail = document.querySelector('input[name="email"]');
+if (inpEmail) {
+  inpEmail.addEventListener('change', function () {
+    helper(this, () => {
+      const email = this.value;
+      const len = email.length;
+      if (len === 0) {
+        return 'empty';
+      }
+      if (len > this.getAttribute('maxlength')) {
+        return 'too long';
+      }
+      if (!/.+@.+\..+/.test(email)) {
+        return 'invalid email id';
+      }
+      return false;
+    });
+  });
+}
 
 const alerts = document.querySelectorAll('.alert');
 for (const alert of alerts) {
   alert.querySelector('.btn-close').addEventListener('click', function () {
     this.parentElement.remove();
   });
+}
+
+const toggleLinks = document.querySelectorAll('a.toggleForm');
+for (const link of toggleLinks) {
+  link.addEventListener('click', toggleForm);
+}
+if (window.location.hash === '#forgot') {
+  toggleForm();
 }

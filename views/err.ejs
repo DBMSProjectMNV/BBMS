@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Error (<%= code; %>) <%= desc; %>!!</title>
-    </head>
-    <body>
-        <h2><%= desc %></h2>
-        <div>
-            <p><a href="#!"><%= url; %></a></p>
-            <p>Error code: <%= code; %></p>
-            <p>Description: <%= desc; %></p>
-        </div>
-        <% if (locals.stack) { %>
-          <div class="stack">
-            <p>Stack trace:</p>
-            <pre><%= stack %></pre>
-          </div>
-        <% } %>
-    </body>
-</html>
+<%- include('partials/header'); %>
+<title>Error (<%= locals.code ?? 500 %>) <%= locals.desc ?? 'Internal server error' %></title>
+<%- include('partials/layout'); %>
+<main>
+  <h2><%= desc %></h2>
+  <div>
+      <p><a href="#!"><%= url; %></a></p>
+      <p>Error code: <%= code; %></p>
+      <p>Description: <%= desc; %></p>
+  </div>
+  <% if (locals.stack) { %>
+    <div class="stack">
+      <p>Stack trace:</p>
+      <pre><%= stack %></pre>
+    </div>
+  <% } %>
+</main>
+<%- include('partials/footer'); %>

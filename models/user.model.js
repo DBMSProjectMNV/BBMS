@@ -29,6 +29,41 @@ const verifyPassword = async (username, password) => {
   }
 };
 
+const findHintQ = async username => {
+  let sql;
+  try {
+    sql = 'SELECT Retailer_id FROM Retailers WHERE Retailer_name = ?';
+    const [retailers] = await db.query(sql, [username]);
+    if (retailers.length !== 1) {
+      return null;
+    }
+    const rid = retailers[0]['Retailer_id'];
+    sql = 'SELECT Hint_question FROM User_Accounts WHERE Retailer_id = ?';
+    const [[row]] = await db.query(sql, [rid]);
+    if (row['Hint_question']) {
+      return row['Hint_question'];
+    }
+    return null;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+const verifyAnswer = async (hintq, ans) => {
+  const sql = 'SELECT Answer FROM User_Accounts WHERE Hint_question = ?';
+  try {
+    const [[row]] = await db.query(sql, [hintq]);
+    if (row.Answer === ans) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export default {
-  verifyPassword
+  verifyPassword,
+  findHintQ,
+  verifyAnswer
 };

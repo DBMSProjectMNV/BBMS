@@ -1,67 +1,100 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <link rel="stylesheet" href="/css/login.css" />
-    <script src="/js/login.js" defer></script>
-  </head>
-  <body>
-    <div class="form-container">
-      <% const url = locals.redirect ?? ''; %>
-      <form action="<%= '/auth/login?' + url %>" method="post">
-        <div>
-          <h2 class="center">Login</h2>
-        </div>
-        <div>
-          <% if (locals.error) { %>
-            <% for (const message of error) { %>
-              <div class="alert error">
-                <p><%= message %></p>
-                <button type="button" class="btn-close"></button>
-              </div>
-            <% } %>
+<%- include('partials/header'); %>
+<title>Login</title>
+<link rel="stylesheet" href="/css/forms.css" />
+<script src="/js/login.js" defer></script>
+<script src="/js/charcount.js" defer></script>
+<%- include('partials/layout'); %>
+<main>
+  <div class="form-container">
+    <% const url = locals.redirect ?? ''; %>
+    <form id="login" action="<%= '/auth/login?' + url %>" method="post">
+      <div>
+        <h2 class="center">Login</h2>
+      </div>
+      <div>
+        <% if (locals.error) { %>
+          <% for (const message of error) { %>
+            <div class="alert error">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
           <% } %>
-          <% if (locals.success) { %>
-            <% for (const message of success) { %>
-              <div class="alert success">
-                <p><%= message %></p>
-                <button type="button" class="btn-close"></button>
-              </div>
-            <% } %>
+        <% } %>
+        <% if (locals.success) { %>
+          <% for (const message of success) { %>
+            <div class="alert success">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
           <% } %>
+        <% } %>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="username" placeholder="Username" maxlength="25" <%= locals.username && 'value=' + username %> />
+            <span>Username:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
         </div>
-        <div>
-          <div class="field">
-            <label>
-              <input type="text" name="username" placeholder="Username" <%= locals.username && 'value=' + username %> />
-              <span>Username:</span>
-            </label>
-            <p><span class="error"></span></p>
-            <p><span class="hint"></span></p>
-          </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <i class="eye suffix password"></i>
+            <input type="password" name="password" placeholder="Password" maxlength="32" <%= locals.password && 'value=' + password %> />
+            <span>Password:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
         </div>
-        <div>
-          <div class="field">
-            <label>
-              <i class="eye suffix password"></i>
-              <input type="password" name="password" placeholder="Password" <%= locals.password && 'value=' + password %> />
-              <span>Password:</span>
-            </label>
-            <p><span class="error"></span></p>
-            <p><span class="hint"></span></p>
-          </div>
+      </div>
+      <div>
+        <div class="center"><a class="toggleForm" href="#forgot">Forgot Password</a></div>
+      </div>
+      <div>
+        <div class="center">New user? <a href="/auth/register">Sign up</a></div>
+      </div>
+      <div>
+        <div class="field">
+          <button class="button">Submit</button>
         </div>
-        <div>
-          <!--<div class="center"><a href="/forgot">Forgot Password</a></div>-->
+      </div>
+    </form>
+    <form id="forgot" class="hidden" action="/auth/forgot" method="get">
+      <div>
+        <h2 class="center">Forgot Password</h2>
+      </div>
+      <div>
+        <% if (locals.error) { %>
+          <% for (const message of error) { %>
+            <div class="alert error">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="username" placeholder="Username" maxlength="25" />
+            <span>Username:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
         </div>
-        <div>
-          <div class="field">
-            <button class="button">Submit</button>
-          </div>
+      </div>
+      <div>
+        <div class="center"><a class="toggleForm" href="#login">Login</a></div>
+      </div>
+      <div>
+        <div class="field">
+          <button class="button">Submit</button>
         </div>
-      </form>
-    </div>
-  </body>
-</html>
+      </div>
+    </form>
+  </div>
+</main>
+<%- include('partials/footer'); %>

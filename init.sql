@@ -3,15 +3,17 @@ use medstore;
 
 CREATE TABLE Retailers (
 	Retailer_id varchar(10) PRIMARY KEY,
-	Retailer_name varchar(60),
+	Retailer_name varchar(30),
 	Retailer_contact varchar(10),
-	Retailer_email varchar(60),
-	Retailer_address varchar(100)
+	Retailer_email varchar(50),
+	Retailer_address varchar(80)
 );
 
 CREATE TABLE User_Accounts (
 	User_id int PRIMARY KEY AUTO_INCREMENT,
 	Password_hash binary(60),
+	Hint_question varchar(50),
+	Answer varchar(30),
 	Retailer_id varchar(10),
 	FOREIGN KEY (Retailer_id) REFERENCES Retailers(Retailer_id)
 );
@@ -28,10 +30,10 @@ CREATE TABLE Inventory (
 CREATE TABLE Suppliers (
 	Retailer_id varchar(10),
 	Supplier_id varchar(10),
-	Supplier_name varchar(50),
+	Supplier_name varchar(30),
 	Supplier_contact varchar(10),
 	Supplier_email varchar(50),
-	Supplier_address varchar(50),
+	Supplier_address varchar(80),
 	PRIMARY KEY (Retailer_id, Supplier_id),
 	FOREIGN KEY (Retailer_id) REFERENCES Retailers(Retailer_id)
 );
@@ -52,8 +54,8 @@ CREATE TABLE Orders (
 CREATE TABLE Staffs (
 	Retailer_id varchar(10),
 	Staff_id int,
-	Staff_name varchar(50),
-	Staff_contact bigint,
+	Staff_name varchar(30),
+	Staff_contact varchar(10),
 	Staff_email varchar(50),
 	Staff_address varchar(80),
 	Job_role varchar(25),
@@ -76,10 +78,10 @@ INSERT INTO Staffs VALUES
 ("103AAA", "2", "Manju", "9909904563", "manju@shop.com", "manju address", "Accountant", 42000),
 ("103AAA", "3", "Vijay", "9909904564", "vijay@shop.com", "vijay address", "Finance", 22000);
 
-INSERT INTO User_Accounts(Password_hash, Retailer_id) VALUES
-("$2b$10$XEMYmyOaZtRwAQsBl8rVCekDA8i9IGYK0viBIK.KMBgfbrQtLyREe", "101AAA"), /* vishal123456 */
-("$2b$10$dKk4suD3BEpfnpUEByXJXu3KXQxG8YAM2WAPVr8qVws9RDNn1O2Ea", "102AAA"), /* ram123456 */
-("$2b$10$qUEaf8WTF6kEIKH2vDtrFeF3z7mR1r/VRIX5OlxLaV4teedlIoO4q", "103AAA"); /* shyam123456 */
+INSERT INTO User_Accounts(Password_hash, Hint_question, Answer, Retailer_id) VALUES
+("$2b$10$XEMYmyOaZtRwAQsBl8rVCekDA8i9IGYK0viBIK.KMBgfbrQtLyREe", "question", "answer", "101AAA"), /* vishal123456 */
+("$2b$10$dKk4suD3BEpfnpUEByXJXu3KXQxG8YAM2WAPVr8qVws9RDNn1O2Ea", "question", "answer", "102AAA"), /* ram123456 */
+("$2b$10$qUEaf8WTF6kEIKH2vDtrFeF3z7mR1r/VRIX5OlxLaV4teedlIoO4q", "question", "answer", "103AAA"); /* shyam123456 */
 
 INSERT INTO Suppliers VALUES
 ("101AAA", "1", "Ashwin", "9871989945", "ashwin@shop.com", "ashwin address"),

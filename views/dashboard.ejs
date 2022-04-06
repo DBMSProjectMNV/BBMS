@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Dashboard</title>
-  </head>
-  <body>
-    <p>Hello welcome to dashboard</p>
-    <p>You are <%= locals.name %></p>
-  </body>
-</html>
+<%- include('partials/header'); %>
+<title>Dashboard</title>
+<%- include('partials/layout') %>
+<main>
+  <p>Hello welcome to dashboard</p>
+  <p>You are <%= locals.name %></p>
+</main>
+<%- include('partials/footer') %>

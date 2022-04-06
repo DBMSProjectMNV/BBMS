@@ -1,0 +1,102 @@
+<%- include('partials/header'); %>
+  <title>Sign up</title>
+  <link rel="stylesheet" href="/css/forms.css" />
+  <script src="/js/login.js" defer></script>
+  <script src="/js/charcount.js" defer></script>
+<%- include('partials/layout'); %>
+<main>
+  <div class="form-container">
+    <form action="/auth/register" method="post" class="big">
+      <div>
+        <h2 class="center">Sign up</h2>
+      </div>
+      <div>
+        <% if (locals.error) { %>
+          <% for (const message of error) { %>
+            <div class="alert error">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="name" placeholder="Username" maxlength="25" />
+            <span>Username:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint">should start with a letter <br />allowed: letters, numbers, space or hyphen(-) or underscore(_). Max 25 characters</span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="password" name="password" placeholder="Password" maxlength="32" />
+            <span>Password:</span>
+            <i class="eye suffix password"></i>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint">at least 8 characters long and atmost 32 characters.</span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <textarea name="hintq" placeholder="Hint question" maxlength="40"></textarea>
+            <span>Hint question:</span>
+          </label>
+          <p><span class="error"></span> <span class="counter"></span> </p>
+          <p><span class="hint">at most 40 characters long</span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <textarea name="answer" placeholder="Answer to hint question" maxlength="25"></textarea>
+            <span>Answer:</span>
+          </label>
+          <p><span class="error"></span> <span class="counter"></span> </p>
+          <p><span class="hint">at most 25 characters long</span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="contact" placeholder="Contact number" maxlength="10" />
+            <span>Contact:</span>
+          </label>
+          <p><span class="error"></span> <span class="counter"></span></p>
+          <p><span class="hint">exactly 10 digit contact number</span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="email" name="email" placeholder="Email address" maxlength="40" />
+            <span>Email:</span>
+          </label>
+          <p><span class="error"></span> <span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <textarea name="address" placeholder="Address" maxlength="75"></textarea>
+            <span>Address:</span>
+          </label>
+          <p><span class="error"></span> <span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <button class="button">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>
+<%- include('partials/footer'); %>
