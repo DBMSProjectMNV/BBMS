@@ -1,0 +1,11 @@
+<%- include('partials/header'); %>
+<title>Forgot password</title>
+<%- include('partials/layout'); %>
+<main>
+  <form action="/auth/change" method="post">
+    <input type="hidden" name="rid" value="<%= rid %>" />
+    <p>Old password: <input type="password" name="old" /></p>
+    <p>New password: <input type="password" name="password" /></p>
+    <p><button>Submit</button></p>
+  </form>
+</main>

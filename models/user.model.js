@@ -29,6 +29,32 @@ const verifyPassword = async (username, password) => {
   }
 };
 
+const verifyById = async (password, rid) => {
+  const sql =
+  'SELECT Password_hash FROM User_Accounts WHERE Retailer_id = ?';
+  try {
+    const [[row]] = await db.query(sql, [rid]);
+    const hash = row['Password_hash'].toString();
+    const result = await bcrypt.compare(password, hash);
+    return result;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+const changePassword = async (newPassword, rid) => {
+  const sql =
+  'UPDATE User_Accounts SET Password_hash = ? WHERE Retailer_id = ?';
+  try {
+    const hash = await bcrypt.hash(newPassword, 10);
+    const result = await db.query(sql, [hash, rid]);
+    return result.affectedRows === 1;
+    // assert result.affectedRows === 1
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 const findHintQ = async username => {
   let sql;
   try {
@@ -41,7 +67,7 @@ const findHintQ = async username => {
     sql = 'SELECT Hint_question FROM User_Accounts WHERE Retailer_id = ?';
     const [[row]] = await db.query(sql, [rid]);
     if (row['Hint_question']) {
-      return row['Hint_question'];
+      return [row['Hint_question'], rid];
     }
     return null;
   } catch (error) {
@@ -49,11 +75,11 @@ const findHintQ = async username => {
   }
 };
 
-const verifyAnswer = async (hintq, ans) => {
-  const sql = 'SELECT Answer FROM User_Accounts WHERE Hint_question = ?';
+const verifyAnswer = async (rid, ans) => {
+  const sql = 'SELECT Answer FROM User_Accounts WHERE Retailer_id = ?';
   try {
-    const [[row]] = await db.query(sql, [hintq]);
-    if (row.Answer === ans) {
+    const [[row]] = await db.query(sql, [rid]);
+    if (row && row.Answer === ans) {
       return true;
     }
     return false;
@@ -64,6 +90,8 @@ const verifyAnswer = async (hintq, ans) => {
 
 export default {
   verifyPassword,
+  verifyById,
+  changePassword,
   findHintQ,
   verifyAnswer
 };

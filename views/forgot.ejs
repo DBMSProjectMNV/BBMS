@@ -6,9 +6,11 @@
     <p>Error: <%= error %></p>
   <% } else { %>
     <form action="/auth/forgot" method="post">
+      <input type="hidden" name="rid" value="<%= rid %>" />
       <p>Hint question: <%= hintq %></p>
-      <input type="hidden" name="hintq" value="<%= hintq %>" />
-      <input type="text" name="ans" />
+      <p>Answer: <input type="text" name="ans" /></p>
+      <p>New password: <input type="password" name="password" /></p>
+      <p><button>Submit</button></p>
     </form>
   <% } %>
 </main>
