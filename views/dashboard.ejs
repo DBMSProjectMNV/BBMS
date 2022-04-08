@@ -4,5 +4,13 @@
 <main>
   <p>Hello welcome to dashboard</p>
   <p>You are <%= locals.name %></p>
+  <br />
+  <p>Link to home page: <a href="/">Home</a></p>
+  <p>Link to change password: <a href="/auth/change">Change password</a></p>
+  <p>Link to your profile: <a href="/profile/<%= locals.name %>"></a></p>
+  <p>View your staffs: <a href="/staffs/">Staffs</a></p>
+  <p>View your suppliers: <a href="/suppliers/">Suppliers</a></p>
+  <p>404 page: <a href="/does/not/exist/">non-existent</a></p>
+  <p>Thank you visit again: <a href="/auth/logout">Logout</a></p>
 </main>
 <%- include('partials/footer') %>
