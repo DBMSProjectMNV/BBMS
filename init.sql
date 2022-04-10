@@ -91,5 +91,8 @@ INSERT INTO Suppliers VALUES
 ("103AAA", "1", "Mehul", "9871989941", "mehul@shop.com", "mehul address"),
 ("103AAA", "2", "Praveen", "9871989942", "praveen@shop.com", "praveen address");
 
+INSERT INTO Inventory VALUES
+("101AAA","Paracetemol",100.0,5);
+
 CREATE USER 'project'@'localhost' IDENTIFIED BY 'iampassword';
 GRANT SELECT, INSERT, UPDATE, DELETE ON medstore.* TO 'project'@'localhost';
