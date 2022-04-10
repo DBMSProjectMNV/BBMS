@@ -91,5 +91,10 @@ INSERT INTO Suppliers VALUES
 ("103AAA", "1", "Mehul", "9871989941", "mehul@shop.com", "mehul address"),
 ("103AAA", "2", "Praveen", "9871989942", "praveen@shop.com", "praveen address");
 
+CREATE INDEX staff_retail ON Staffs (Retailer_id);
+CREATE INDEX supp_retail ON Suppliers (Retailer_id);
+CREATE INDEX order_retail ON Orders (Retailer_id);
+CREATE INDEX inventory_retail ON Inventory (Retailer_id);
+
 CREATE USER 'project'@'localhost' IDENTIFIED BY 'iampassword';
 GRANT SELECT, INSERT, UPDATE, DELETE ON medstore.* TO 'project'@'localhost';
