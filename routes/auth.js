@@ -26,7 +26,7 @@ router.get('/auth/login', (req, res) => {
   [res.locals.username] = req.flash('username');
   [res.locals.password] = req.flash('password');
   [res.locals.redirect] = req.flash('redirect');
-  res.render('login');
+  res.render('login.ejs');
 });
 
 router.get('/auth/register', (req, res) => {
@@ -35,7 +35,7 @@ router.get('/auth/register', (req, res) => {
     return;
   }
   res.locals.error = req.flash('error');
-  res.render('register');
+  res.render('register.ejs');
 });
 
 router.get('/auth/forgot', forgotControllerGET);

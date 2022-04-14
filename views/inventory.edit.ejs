@@ -1,0 +1,21 @@
+<%- include('partials/header'); %>
+<title>Edit <%= med['Medicine_name'] %></title>
+<%- include('partials/layout'); %>
+<main>
+  <form action="/inventory/edit?medname=<%= med['Medicine_name'] %>" method="post">
+    <p>Name: <input type="text" name="name" value="<%= med['Medicine_name'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
+    <p>MRP: <input type="text" name="mrp" value="<%= med['MRP'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
+    <p>Stock: <input type="text" name="stock" value="<%= med['Stock'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
+    <p><button>Submit</button></p>
+  </form>
+</main>
+<script type="text/javascript">
+  const btns = document.querySelectorAll('span.toggle a');
+  for(const a of btns) {
+    a.addEventListener('click', function() {
+      const input = this.parentElement.parentElement.querySelector('input');
+      const bool = input.hasAttribute('disabled');
+      bool ? input.removeAttribute('disabled') : input.setAttribute('disabled', true);
+    });
+  }
+</script>
