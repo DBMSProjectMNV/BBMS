@@ -1,0 +1,15 @@
+<%- include('partials/header'); %>
+<title>Suppliers</title>
+<%- include('partials/layout'); %>
+<main>
+  <% for (const supplier of suppliers) { %>
+    <div>
+      <p><span>Name: </span><span><%= supplier['Supplier_name'] %></span></p>
+      <p><span>Contact: </span><span><%= supplier['Supplier_contact'] %></span></p>
+      <p><span>Email: </span><span><%= supplier['Supplier_email'] %></span></p>
+      <p><span>Address: </span><span><%= supplier['Supplier_address'] %></span></p>
+      <p><span><a href="/suppliers/edit?id=<%= supplier['Supplier_id'] %>">Edit</a></span><span><a href="/suppliers/delete?name=<%= supplier['Supplier_id'] %>">Delete</a></span></p>
+    </div>
+  <% } %>
+</main>
+<%- include('partials/footer') %>

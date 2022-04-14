@@ -1,0 +1,23 @@
+<%- include('partials/header'); %>
+<title>Edit <%= sup['Supplier_name'] %></title>
+<%- include('partials/layout'); %>
+<main>
+  <form action="/suppliers/edit?id=<%= sup['Supplier_id'] %>" method="post">
+    <p>Name: <input type="text" name="name" value="<%= sup['Supplier_name'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
+    <p>Contact: <input type="text" name="contact" value="<%= sup['Supplier_contact'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
+    <p>Email: <input type="text" name="email" value="<%= sup['Supplier_email'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
+    <p>Address: <input type="text" name="address" value="<%= sup['Supplier_address'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
+    <p><button>Submit</button></p>
+  </form>
+</main>
+<script type="text/javascript">
+  const btns = document.querySelectorAll('span.toggle a');
+  for(const a of btns) {
+    a.addEventListener('click', function() {
+      const input = this.parentElement.parentElement.querySelector('input');
+      const bool = input.hasAttribute('disabled');
+      bool ? input.removeAttribute('disabled') : input.setAttribute('disabled', true);
+    });
+  }
+</script>
+<%- include('partials/footer') %>
