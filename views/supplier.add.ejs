@@ -1,0 +1,13 @@
+<%- include('partials/header'); %>
+<title>Add supplier</title>
+<%- include('partials/layout'); %>
+<main>
+  <form action="/suppliers/add" method="post">
+    <p>Name: <input type="text" name="name" />
+    <p>Contact: <input type="text" name="contact" />
+    <p>Email: <input type="text" name="email" />
+    <p>Address: <input type="text" name="address" />
+    <p><button>Submit</button></p>
+  </form>
+</main>
+<%- include('partials/footer') %>

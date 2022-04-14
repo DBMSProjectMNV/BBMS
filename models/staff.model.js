@@ -51,9 +51,33 @@ const del = async (rid, id) => {
   }
 };
 
+const add = async staff => {
+  const sql = 'INSERT INTO Staffs VALUES ?';
+  const fields = [
+    'Retailer_id',
+    'Staff_id',
+    'Staff_name',
+    'Staff_contact',
+    'Staff_email',
+    'Staff_address',
+    'Job_role',
+    'Salary'
+  ];
+  try {
+    console.log(staff);
+    const rows = await findAll(staff['Retailer_id']);
+    const maxm = Math.max(...rows.map(row => row['Staff_id']));
+    staff['Staff_id'] = maxm + 1;
+    await db.query(sql, [[fields.map(col => staff[col])]]);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export default {
   findAll,
   find,
   save,
-  del
+  del,
+  add
 };

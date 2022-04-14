@@ -15,7 +15,7 @@
         "prefer-const": "warn",
         "no-new-object": "error",
         "object-shorthand": "error",
-        "quote-props": ["warn", "as-needed"],
+        "quote-props": ["warn", "consistent"],
         "prefer-object-spread": "error",
         "no-array-constructor": "error",
         "prefer-destructuring": "warn",

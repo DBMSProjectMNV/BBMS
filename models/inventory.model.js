@@ -48,9 +48,20 @@ const del = async (rid, name) => {
   }
 };
 
+const add = async med => {
+  const sql = 'INSERT INTO Inventory VALUES ?';
+  const fields = ['Retailer_id', 'Medicine_name', 'MRP', 'Stock'];
+  try {
+    await db.query(sql, [[fields.map(col => med[col])]]);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export default {
   findAll,
   find,
   save,
-  del
+  del,
+  add
 };

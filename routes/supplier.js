@@ -48,4 +48,24 @@ router.get(
   }
 );
 
+router.get('/suppliers/add', checkLogin, (req, res) => {
+  res.render('supplier.add.ejs');
+});
+
+router.post(
+  '/suppliers/add',
+  checkLogin,
+  async (req, res) => {
+    const sup = {
+      'Retailer_id': req.user.rid,
+      'Supplier_name': req.body.name,
+      'Supplier_contact': req.body.contact,
+      'Supplier_email': req.body.email,
+      'Supplier_address': req.body.address
+    };
+    await Supplier.add(sup);
+    res.redirect('/suppliers');
+  }
+);
+
 export default router;

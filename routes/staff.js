@@ -54,4 +54,22 @@ router.get(
   }
 );
 
+router.get('/staffs/add', checkLogin, (req, res) => {
+  res.render('staff.add.ejs');
+});
+
+router.post('/staffs/add', checkLogin, async (req, res) => {
+  const staff = {
+    'Retailer_id': req.user.rid,
+    'Staff_name': req.body.name,
+    'Staff_contact': req.body.contact,
+    'Staff_email': req.body.email,
+    'Staff_address': req.body.address,
+    'Job_role': req.body.jobrole,
+    'Salary': req.body.salary
+  };
+  await Staff.add(staff);
+  res.redirect('/staffs');
+});
+
 export default router;

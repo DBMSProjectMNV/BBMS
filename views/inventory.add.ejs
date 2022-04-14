@@ -1,0 +1,12 @@
+<%- include('partials/header'); %>
+<title>Add medicine</title>
+<%- include('partials/layout'); %>
+<main>
+  <form action="/inventory/add" method="post">
+    <p>Name: <input type="text" name="name" />
+    <p>MRP: <input type="text" name="mrp" />
+    <p>Stock: <input type="text" name="stock" />
+    <p><button>Submit</button></p>
+  </form>
+</main>
+<%- include('partials/footer') %>

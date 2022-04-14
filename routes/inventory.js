@@ -51,4 +51,27 @@ router.get(
   }
 );
 
+router.get(
+  '/inventory/add',
+  checkLogin,
+  (req, res) => {
+    res.render('inventory.add.ejs');
+  }
+);
+
+router.post(
+  '/inventory/add',
+  checkLogin,
+  async (req, res) => {
+    const med = {
+      'Retailer_id': req.user.rid,
+      'Medicine_name': req.body.name,
+      'MRP': req.body.mrp,
+      'Stock': req.body.stock
+    };
+    await Inventory.add(med);
+    res.redirect('/inventory');
+  }
+);
+
 export default router;

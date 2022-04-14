@@ -49,10 +49,30 @@ const del = async (rid, id) => {
   }
 };
 
+const add = async supplier => {
+  const sql = 'INSERT INTO Suppliers VALUES ?';
+  const fields = [
+    'Retailer_id',
+    'Supplier_id',
+    'Supplier_name',
+    'Supplier_contact',
+    'Supplier_email',
+    'Supplier_address'
+  ];
+  try {
+    const rows = await findAll(supplier['Retailer_id']);
+    const maxm = Math.max(...rows.map(row => row['Supplier_id']));
+    supplier['Supplier_id'] = maxm + 1;
+    await db.query(sql, [[fields.map(col => supplier[col])]]);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
 
 export default {
   findAll,
   find,
   save,
-  del
+  del,
+  add
 };

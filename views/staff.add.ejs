@@ -1,0 +1,15 @@
+<%- include('partials/header'); %>
+<title>Add staff</title>
+<%- include('partials/layout'); %>
+<main>
+  <form action="/staffs/add" method="post">
+    <p>Name: <input type="text" name="name" />
+    <p>Contact: <input type="text" name="contact" />
+    <p>Email: <input type="text" name="email" />
+    <p>Address: <input type="text" name="address" />
+    <p>Job Role: <input type="text" name="jobrole" />
+    <p>Salary: <input type="text" name="salary" />
+    <p><button>Submit</button></p>
+  </form>
+</main>
+<%- include('partials/footer') %>
