@@ -21,6 +21,39 @@ const findAll = async rid => {
   }
 };
 
+const find = async (rid, id) => {
+  const sql =
+  'SELECT * FROM Staffs WHERE Retailer_id = ? AND Staff_id = ?';
+  try {
+    const [[row]] = await db.query(sql, [rid, id]);
+    return row;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+const save = async (rid, id, staff) => {
+  const sql = 'UPDATE Staffs SET ? WHERE Retailer_id = ? AND Staff_id = ?';
+  try {
+    await db.query(sql, [staff, rid, id]);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+const del = async (rid, id) => {
+  const sql =
+  'DELETE FROM Staffs WHERE Retailer_id = ? AND Staff_id = ?';
+  try {
+    await db.query(sql, [rid, id]);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export default {
-  findAll
+  findAll,
+  find,
+  save,
+  del
 };

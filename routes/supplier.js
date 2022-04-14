@@ -7,8 +7,44 @@ router.get(
   '/suppliers/',
   checkLogin,
   async (req, res) => {
-    const staffs = await Supplier.findAll(req.user.rid);
-    res.end(JSON.stringify(staffs, null, 4));
+    const suppliers = await Supplier.findAll(req.user.rid);
+    res.render('supplier.ejs', { suppliers });
+  }
+);
+
+router.get(
+  '/suppliers/edit',
+  checkLogin,
+  async (req, res) => {
+    const sup = await Supplier.find(req.user.rid, req.query.id);
+    res.render('supplier.edit.ejs', { sup });
+  }
+);
+
+router.post(
+  '/suppliers/edit',
+  checkLogin,
+  async (req, res) => {
+    const fields = ['name', 'contact', 'email', 'address'];
+    const supplier = {};
+    for (const col of fields) {
+      if (req.body[col]) {
+        supplier[`Supplier_${col}`] = req.body[col];
+      }
+    }
+    if (JSON.stringify(supplier) !== '{}') {
+      await Supplier.save(req.user.rid, req.query.id, supplier);
+    }
+    res.redirect('/suppliers');
+  }
+);
+
+router.get(
+  '/suppliers/delete',
+  checkLogin,
+  async (req, res) => {
+    await Supplier.del(req.user.rid, req.query.id);
+    res.redirect('/suppliers');
   }
 );
 

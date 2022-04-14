@@ -7,8 +7,6 @@ MRP: float
 Stock: number
 */
 
-const fields = ['Medicine_name', 'MRP', 'Stock'];
-
 const findAll = async rid => {
   const sql = 'SELECT * FROM Inventory WHERE Retailer_id = ?';
   try {
@@ -31,17 +29,10 @@ const find = async (rid, name) => {
 };
 
 const save = async (rid, name, med) => {
-  const sql = `
-    UPDATE Inventory SET
-      Medicine_name = ?,
-      MRP = ?,
-      Stock = ?
-    WHERE Retailer_id = ? AND Medicine_name = ?
-  `;
+  const sql =
+  'UPDATE Inventory SET ? WHERE Retailer_id = ? AND Medicine_name = ?';
   try {
-    const now = await find(rid, name);
-    const array = fields.map(col => med[col] || now[col]).concat([rid, name]);
-    await db.query(sql, array);
+    await db.query(sql, [med, rid, name]);
   } catch (error) {
     return Promise.reject(error);
   }

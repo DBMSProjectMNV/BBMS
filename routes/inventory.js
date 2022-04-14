@@ -25,12 +25,19 @@ router.post(
   '/inventory/edit',
   checkLogin,
   async (req, res) => {
-    const med = {
-      MRP: req.body.mrp,
-      Stock: req.body.stock
-    };
-    med['Medicine_name'] = req.body.name;
-    await Inventory.save(req.user.rid, req.query.medname, med);
+    const med = {};
+    if (req.body.mrp) {
+      med.MRP = req.body.mrp;
+    }
+    if (req.body.stock) {
+      med.Stock = req.body.stock;
+    }
+    if (req.body.name) {
+      med['Medicine_name'] = req.body.name;
+    }
+    if (JSON.stringify(med) !== '{}') {
+      await Inventory.save(req.user.rid, req.query.medname, med);
+    }
     res.redirect('/inventory');
   }
 );
