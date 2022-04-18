@@ -1,5 +1,6 @@
-import User from '../models/user.model.js';
 import { checkLogin } from '../middlewares/auth.js';
+import User from '../models/user.model.js';
+import Retailer from '../models/retailer.model.js';
 
 const forgotControllerPOST = async (req, res) => {
   const { rid } = req.body;
@@ -73,9 +74,29 @@ const changePasswordPOST = async (req, res, next) => {
   }
 };
 
+const registerController = async (req, res) => {
+  const ret = {
+    'Retailer_name': req.body.name,
+    'Retailer_contact': req.body.contact,
+    'Retailer_email': req.body.email,
+    'Retailer_address': req.body.address
+  };
+  const rid = await Retailer.add(ret);
+  const user = {
+    'password': req.body.password,
+    'Hint_question': req.body.hintq,
+    'Answer': req.body.answer,
+    'Retailer_id': rid
+  };
+  await User.add(user);
+  req.flash('success', 'Registered successfully. Please login to continue');
+  res.redirect('/auth/login');
+};
+
 export {
   forgotControllerGET,
   forgotControllerPOST,
   changePasswordGET,
-  changePasswordPOST
+  changePasswordPOST,
+  registerController
 };

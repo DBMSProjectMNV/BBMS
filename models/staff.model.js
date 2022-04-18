@@ -64,7 +64,6 @@ const add = async staff => {
     'Salary'
   ];
   try {
-    console.log(staff);
     const rows = await findAll(staff['Retailer_id']);
     const maxm = Math.max(...rows.map(row => row['Staff_id']));
     staff['Staff_id'] = maxm + 1;

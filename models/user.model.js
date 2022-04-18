@@ -88,10 +88,25 @@ const verifyAnswer = async (rid, ans) => {
   }
 };
 
+const add = async user => {
+  const sql = `
+    INSERT INTO User_Accounts
+    (Password_hash, Hint_question, Answer, Retailer_id) VALUES ?
+  `;
+  const fields = ['Password_hash', 'Hint_question', 'Answer', 'Retailer_id'];
+  try {
+    user['Password_hash'] = await bcrypt.hash(user.password, 10);
+    await db.query(sql, [[fields.map(col => user[col])]]);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export default {
   verifyPassword,
   verifyById,
   changePassword,
   findHintQ,
-  verifyAnswer
+  verifyAnswer,
+  add
 };

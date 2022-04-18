@@ -35,6 +35,27 @@ const find = (value, by) => {
   return byId(value);
 };
 
+const add = async ret => {
+  const sql = 'INSERT INTO Retailers VALUES ?';
+  const fields = [
+    'Retailer_id',
+    'Retailer_name',
+    'Retailer_contact',
+    'Retailer_email',
+    'Retailer_address'
+  ];
+  try {
+    const [rows] = await db.query('SELECT Retailer_id FROM Retailers');
+    const maxm = Math.max(...rows.map(row => parseInt(row['Retailer_id'], 10)));
+    ret['Retailer_id'] = `${maxm + 1}`;
+    await db.query(sql, [[fields.map(col => ret[col])]]);
+    return ret['Retailer_id'];
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export default {
-  find
+  find,
+  add
 };

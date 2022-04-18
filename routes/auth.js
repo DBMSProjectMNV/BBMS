@@ -6,9 +6,9 @@ import {
   forgotControllerPOST,
   forgotControllerGET,
   changePasswordGET,
-  changePasswordPOST
+  changePasswordPOST,
+  registerController
 } from '../controllers/auth.js';
-// import User from '../models/user.model.js';
 const router = Router();
 
 router.get('/auth/', (req, res) => {
@@ -37,6 +37,7 @@ router.get('/auth/register', (req, res) => {
   res.locals.error = req.flash('error');
   res.render('register.ejs');
 });
+router.post('/auth/register', registerValidator, registerController);
 
 router.get('/auth/forgot', forgotControllerGET);
 router.post('/auth/forgot', forgotControllerPOST);
@@ -64,8 +65,5 @@ router.post(
   }
 );
 
-router.post('/auth/register', registerValidator, (req, res) => {
-  res.end('Congratulations! you are registered successfully');
-});
 
 export default router;
