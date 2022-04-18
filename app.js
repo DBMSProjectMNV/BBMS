@@ -28,6 +28,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('./public'));
 
+app.use((req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.locals.usericon = req.user.name;
+  }
+  next();
+});
+
 app.all('/', (req, res) => {
   res.render('index');
 });

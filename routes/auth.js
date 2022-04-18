@@ -35,6 +35,18 @@ router.get('/auth/register', (req, res) => {
     return;
   }
   res.locals.error = req.flash('error');
+  const params = [
+    'name',
+    'password',
+    'hintq',
+    'answer',
+    'contact',
+    'email',
+    'address'
+  ];
+  for (const param of params) {
+    [res.locals[param]] = req.flash(param);
+  }
   res.render('register.ejs');
 });
 router.post('/auth/register', registerValidator, registerController);

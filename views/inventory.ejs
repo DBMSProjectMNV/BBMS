@@ -7,7 +7,7 @@
       <p><span>Name: </span><span><%= med['Medicine_name'] %></span></p>
       <p><span>MRP: </span><span><%= med['MRP'] %></span></p>
       <p><span>Stock: </span><span><%= med['Stock'] %></span></p>
-      <p><span><a href="/inventory/edit?name=<%= med['Medicine_name'] %>">Edit</a></span><span><a href="/inventory/delete?name=<%= med['Medicine_name'] %>">Delete</a></span></p>
+      <p><span><a href="/inventory/edit?name=<%= encodeURI(med['Medicine_name']) %>">Edit</a></span><span><a href="/inventory/delete?name=<%= encodeURI(med['Medicine_name']) %>">Delete</a></span></p>
     </div>
   <% } %>
   <div class="">

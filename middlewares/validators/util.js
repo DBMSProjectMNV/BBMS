@@ -4,19 +4,23 @@ import { body, validationResult } from 'express-validator';
 const passwdError =
 'password may only contain alphanumeric, - _ & % $ # @ ! * and space';
 
-const nameGen = (field, prefix = '') => field.trim()
+const username = body('username', 'invalid username')
+  .trim()
   .isLength({ min: 1, max: 25 })  // name : 1 to 25
-  .withMessage(`${prefix}name must be atmost 25 characters long and non empty`)
+  .withMessage('username must be atmost 25 characters long and non empty')
   .customSanitizer(value => value.replaceAll(/[ _]/g, '-')) // space '_' -> '-'
   .matches(/^[a-zA-Z][a-zA-Z_\-0-9]*$/)  // :alnum: '-' '_' allowed
-  .withMessage(`${prefix}name can only contain alnum, hyphen, underscore`)
+  .withMessage('username can only contain alnum, hyphen, underscore')
   .matches(/-?[a-zA-Z0-9]+$/) // hyphen cannot be last letter
-  .withMessage(`${prefix}name should not have last letter hyphen`)
+  .withMessage('username should not have last letter hyphen')
   .customSanitizer(value => value.replaceAll(/-+/g, '-')) // single
   .customSanitizer(value => value.toLowerCase()); // all lower case
 
-
-const username = nameGen(body('username', 'invalid username'), 'user');
+const name = body('name', 'invalid name')
+  .trim()
+  .isLength({ min: 1, max: 25 }) // name : 1 to 25
+  .withMessage('name must be atmost 25 characters long and non empty')
+  .customSanitizer(value => value.toLowerCase()); // all lower case
 
 const password = body('password', 'invalid password')
   .trim()
@@ -75,6 +79,6 @@ export {
   contact,
   email,
   address,
-  nameGen,
+  name,
   resultGen
 };

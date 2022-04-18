@@ -21,7 +21,7 @@ CREATE TABLE User_Accounts (
 CREATE TABLE Inventory (
 	Retailer_id varchar(10),
 	Medicine_name varchar(50),
-	MRP decimal(8,2),
+	MRP int,
 	Stock int,
 	PRIMARY KEY (Retailer_id, Medicine_name),
 	FOREIGN KEY (Retailer_id) REFERENCES Retailers(Retailer_id)
@@ -43,7 +43,7 @@ CREATE TABLE Orders (
 	Order_id varchar(10),
 	Medicine_name varchar(50),
 	Quantity int,
-	MRP decimal(8,2),
+	MRP int,
 	Order_date date,
 	Supplier_id varchar(10),
 	Order_status enum("COMPLETED","PENDING","CANCELLED"),
@@ -59,7 +59,7 @@ CREATE TABLE Staffs (
 	Staff_email varchar(50),
 	Staff_address varchar(80),
 	Job_role varchar(25),
-	Salary decimal(10,2),
+	Salary int,
 	PRIMARY KEY (Retailer_id, Staff_id),
 	FOREIGN KEY (Retailer_id) REFERENCES Retailers(Retailer_id)
 );

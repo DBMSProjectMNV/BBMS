@@ -1,12 +1,5 @@
 import { body } from 'express-validator';
-import {
-  name,
-  password,
-  contact,
-  email,
-  address,
-  resultGen
-} from './util.js';
+import { name, contact, email, address, resultGen } from './util.js';
 
 const hintq = body('hintq', 'invalid hint question')
   .trim()
@@ -24,16 +17,13 @@ const answer = body('answer', 'invalid hint answer')
   .withMessage('Answer should be max 25 characters long')
   .customSanitizer(value => value.toLowerCase());
 
-const params = [
-  'name',
-  'password',
-  'hintq',
-  'answer',
-  'contact',
-  'email',
-  'address'
+const params = ['name', 'contact', 'email', 'address', 'hintq', 'answer'];
+export default url => [
+  name,
+  contact,
+  email,
+  address,
+  hintq,
+  answer,
+  resultGen(params, url)
 ];
-
-const result = resultGen(params, '/auth/register');
-
-export default [name, password, hintq, answer, contact, email, address, result];
