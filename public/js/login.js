@@ -5,7 +5,7 @@ function validateUsername (uname) {
   if (uname.length > 25) {
     return 'too long';
   }
-  return /^[a-zA-Z][a-zA-Z\-_0-9]*$/.test(uname) ? false : 'invalid username';
+  return /^[a-zA-Z][a-zA-Z\-_0-9 ]*$/.test(uname) ? false : 'invalid username';
 }
 
 function validatePassword (pswd) {
