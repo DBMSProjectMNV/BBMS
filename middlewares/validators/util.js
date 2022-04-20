@@ -68,7 +68,7 @@ const resultGen = (params, url) => (req, res, next) => {
       }
       req.flash(param, req.body[param]);
     }
-    return res.redirect(url);
+    return res.redirect(url ?? req.url);
   }
   next();
 };

@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import { checkLogin } from '../middlewares/auth.js';
 import Inventory from '../models/inventory.model.js';
+import validator from '../middlewares/validators/inventory.js';
 const router = Router();
+
+const params = ['name', 'mrp', 'stock'];
 
 router.get(
   '/inventory/',
@@ -15,15 +18,21 @@ router.get(
 router.get(
   '/inventory/edit',
   checkLogin,
-  async (req, res) => {
+  async (req, res, next) => {
     const med = await Inventory.find(req.user.rid, req.query.name);
-    res.render('inventory.edit.ejs', { med });
+    if (med) {
+      res.locals.error = req.flash('error');
+      res.render('inventory.edit.ejs', { med });
+    } else {
+      next();
+    }
   }
 );
 
 router.post(
   '/inventory/edit',
   checkLogin,
+  validator,
   async (req, res) => {
     const med = {};
     if (req.body.mrp) {
@@ -36,7 +45,7 @@ router.post(
       med['Medicine_name'] = req.body.name;
     }
     if (JSON.stringify(med) !== '{}') {
-      await Inventory.save(req.user.rid, req.query.medname, med);
+      await Inventory.save(req.user.rid, req.query.name, med);
     }
     res.redirect('/inventory');
   }
@@ -55,6 +64,10 @@ router.get(
   '/inventory/add',
   checkLogin,
   (req, res) => {
+    res.locals.error = req.flash('error');
+    for (const param of params) {
+      [res.locals[param]] = req.flash(param);
+    }
     res.render('inventory.add.ejs');
   }
 );
@@ -62,6 +75,7 @@ router.get(
 router.post(
   '/inventory/add',
   checkLogin,
+  validator,
   async (req, res) => {
     const med = {
       'Retailer_id': req.user.rid,

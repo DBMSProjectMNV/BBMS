@@ -1,22 +1,60 @@
 <%- include('partials/header'); %>
-<title>Edit <%= med['Medicine_name'] %></title>
+  <title>Edit <%= med['Medicine_name'] %></title>
+	<link rel="stylesheet" href="/css/forms.css" />
+	<script src="/js/charcount.js" defer></script>
 <%- include('partials/layout'); %>
 <main>
-  <form action="/inventory/edit?medname=<%= encodeURI(med['Medicine_name']) %>" method="post">
-    <p>Name: <input type="text" name="name" value="<%= med['Medicine_name'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p>MRP: <input type="text" name="mrp" value="<%= med['MRP'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p>Stock: <input type="text" name="stock" value="<%= med['Stock'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p><button>Submit</button></p>
-  </form>
+	<div class="form-container">
+    <form action="/inventory/edit?name=<%= encodeURI(med['Medicine_name']) %>" method="post">
+			<div>
+				<h2 class="center">Edit Medicine</h2>
+			</div>
+      <div>
+        <% if (locals.error) { %>
+          <% for (const message of error) { %>
+            <div class="alert error">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="name" placeholder="Medicine name" maxlength="40" value="<%= med['Medicine_name'] %>" />
+            <span>Medicine name:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="number" name="mrp" placeholder="MRP" value="<%= med['MRP'] %>" />
+            <span>MRP:</span>
+          </label>
+          <p><span class="error"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="number" name="stock" placeholder="Stock" value="<%= med['Stock'] %>" />
+            <span>Stock:</span>
+          </label>
+          <p><span class="error"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <button class="button">Submit</button>
+        </div>
+      </div>
+		</form>
+	</div>
 </main>
-<script type="text/javascript">
-  const btns = document.querySelectorAll('span.toggle a');
-  for(const a of btns) {
-    a.addEventListener('click', function() {
-      const input = this.parentElement.parentElement.querySelector('input');
-      const bool = input.hasAttribute('disabled');
-      bool ? input.removeAttribute('disabled') : input.setAttribute('disabled', true);
-    });
-  }
-</script>
 <%- include('partials/footer') %>

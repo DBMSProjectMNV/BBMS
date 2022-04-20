@@ -12,4 +12,4 @@ const stock = body('stock', 'invalid value for stock')
   .isInt()
   .withMessage('stock value should be a number');
 
-export default url => [name, mrp, stock, resultGen(params, url)];
+export default [name, mrp, stock, resultGen(params)];
