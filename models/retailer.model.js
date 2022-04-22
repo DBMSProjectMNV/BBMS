@@ -35,6 +35,15 @@ const find = (value, by) => {
   return byId(value);
 };
 
+const save = async (rid, ret) => {
+  const sql = 'UPDATE Retailers SET ? WHERE Retailer_id = ?';
+  try {
+    await db.query(sql, [ret, rid]);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 const add = async ret => {
   const sql = 'INSERT INTO Retailers VALUES ?';
   const fields = [
@@ -57,5 +66,6 @@ const add = async ret => {
 
 export default {
   find,
+  save,
   add
 };

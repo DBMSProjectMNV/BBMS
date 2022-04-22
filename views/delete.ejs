@@ -1,0 +1,10 @@
+<%- include('partials/header'); %>
+<title>Delete account</title>
+<%- include('partials/layout'); %>
+<main>
+  <form action="/auth/delete" method="post">
+    <p>Old password: <input type="password" name="old" /></p>
+    <p><button>Delete</button></p>
+  </form>
+</main>
+<%- include('partials/footer') %>

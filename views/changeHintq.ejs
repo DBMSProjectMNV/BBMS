@@ -1,0 +1,11 @@
+<%- include('partials/header'); %>
+<title>Change Hint question</title>
+<%- include('partials/layout'); %>
+<main>
+  <form action="/auth/hint" method="post">
+    <p>Hint question:</p><textarea name="hintq"></textarea>
+    <p>Answer:</p><textarea name="ans"></textarea>
+    <p><button>Submit</button></p>
+  </form>
+</main>
+<%- include('partials/footer') %>

@@ -1,0 +1,12 @@
+<%- include('partials/header'); %>
+<title><%= ret['Retailer_name'] %></title>
+<%- include('partials/layout'); %>
+<main>
+  <div>
+    <p><span>Name: </span><span><%= ret['Retailer_name'] %></span></p>
+    <p><span>Contact: </span><span><%= ret['Retailer_contact'] %></span></p>
+    <p><span>Email: </span><span><%= ret['Retailer_email'] %></span></p>
+    <p><span>Address: </span><span><%= ret['Retailer_address'] %></span></p>
+  </div>
+</main>
+<%- include('partials/footer') %>

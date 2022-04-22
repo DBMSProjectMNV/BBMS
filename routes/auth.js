@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import passport from '../middlewares/passport.js';
+import { checkLogin } from '../middlewares/auth.js';
 import loginValidator from '../middlewares/validators/login.js';
 import registerValidator from '../middlewares/validators/register.js';
 import {
@@ -77,5 +78,11 @@ router.post(
   }
 );
 
+router.get('/auth/hint', checkLogin, (req, res) => {
+  res.render('changeHintq.ejs');
+});
+router.get('/auth/delete', checkLogin, (req, res) => {
+  res.render('delete.ejs');
+});
 
 export default router;

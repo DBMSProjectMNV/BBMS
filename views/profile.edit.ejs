@@ -1,0 +1,26 @@
+<%- include('partials/header'); %>
+<title>Edit <%= ret['Retailer_name'] %></title>
+<%- include('partials/layout'); %>
+<main>
+  <form action="/profile/edit" method="post">
+    <p>Name: <input type="text" name="name" value="<%= ret['Retailer_name'] %>" readonly />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
+    <p>Contact: <input type="text" name="contact" value="<%= ret['Retailer_contact'] %>" readonly />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
+    <p>Email: <input type="text" name="email" value="<%= ret['Retailer_email'] %>" readonly />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
+    <p>Address: <input type="text" name="address" value="<%= ret['Retailer_address'] %>" readonly />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
+    <p><a href="/auth/change">Change</a> my password</p>
+    <p><a href="/auth/hint">Edit</a> hint question for password reset</p>
+    <p><a href="/auth/delete">Delete</a> my account</p>
+    <p><button>Submit</button></p>
+  </form>
+</main>
+<script type="text/javascript">
+  const btns = document.querySelectorAll('span.toggle a');
+  for(const a of btns) {
+    a.addEventListener('click', function() {
+      const input = this.parentElement.parentElement.querySelector('input');
+      const bool = input.hasAttribute('readonly');
+      bool ? input.removeAttribute('readonly') : input.setAttribute('readonly', true);
+    });
+  }
+</script>
+<%- include('partials/footer') %>
