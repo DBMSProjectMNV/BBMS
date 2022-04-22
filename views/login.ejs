@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="/css/forms.css" />
 <script src="/js/forms.js" defer></script>
 <script src="/js/login.js" defer></script>
+<script src="/js/validators/util.js" defer></script>
 <%- include('partials/layout'); %>
 <main>
   <div class="form-container">
@@ -43,7 +44,7 @@
         <div class="field">
           <label>
             <i class="eye suffix password"></i>
-            <input type="password" name="password" placeholder="Password" maxlength="32" <%= locals.password && 'value=' + password %> />
+            <input type="password" name="password" placeholder="Password" maxlength="32" value="" />
             <span>Password:</span>
           </label>
           <p><span class="error"></span><span class="counter"></span></p>

@@ -8,20 +8,20 @@ const toggleAccordion = function () {
       body.style.height = null;
       classes.remove('collapse');
     };
-    const scrollHeight = body.scrollHeight;
-    body.style.height = scrollHeight + 'px';
+    const { scrollHeight } = body;
+    body.style.height = `${scrollHeight}px`;
     body.addEventListener('transitionend', evtListener);
   } else {
     // collapse it
-    const scrollHeight = body.scrollHeight;
-    const transition = body.style.transition;
+    const { scrollHeight } = body;
+    const { transition } = body.style;
     body.style.transition = '';
     requestAnimationFrame(() => {
-      body.style.height = scrollHeight + 'px';
+      body.style.height = `${scrollHeight}px`;
       body.style.transition = transition;
 
       requestAnimationFrame(() => {
-        body.style.height = 0 + 'px';
+        body.style.height = `${0}px`;
         classes.add('collapse');
         body.style.height = null;
       });

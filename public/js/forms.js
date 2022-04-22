@@ -1,4 +1,4 @@
-function helper (element, validationfn) {
+window.helper = (element, validationfn) => {
   const ans = validationfn(element.value);
   const err = element.closest('.field').querySelector('.error');
   const label = element.parentElement.classList;
@@ -13,7 +13,7 @@ function helper (element, validationfn) {
     label.add('valid');
     label.remove('invalid');
   }
-}
+};
 function count (element) {
   const output = element.closest('.field').querySelector('.counter');
   const str = `${element.value.length}/${element.getAttribute('maxlength')}`;
