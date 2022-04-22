@@ -2,16 +2,29 @@
 <title>Inventory</title>
 <%- include('partials/layout'); %>
 <main>
-  <% for (const med of medicines) { %>
-    <div>
-      <p><span>Name: </span><span><%= med['Medicine_name'] %></span></p>
-      <p><span>MRP: </span><span><%= med['MRP'] %></span></p>
-      <p><span>Stock: </span><span><%= med['Stock'] %></span></p>
-      <p><span><a href="/inventory/edit?name=<%= encodeURI(med['Medicine_name']) %>">Edit</a></span><span><a href="/inventory/delete?name=<%= encodeURI(med['Medicine_name']) %>">Delete</a></span></p>
+  <div class="container-flex">
+    <h2>Inventory</h2>
+    <div class="accordion">
+      <% for (const med of medicines) { %>
+        <div class="collapse">
+          <p class="accordion-header" tabindex="0"><%= med['Medicine_name'] %></p>
+          <div class="accordion-body">
+            <ul class="dll">
+              <li><span>Name: </span><span><%= med['Medicine_name'] %></span></li>
+              <li><span>MRP: </span><span><%= med['MRP'] %></span></li>
+              <li><span>Stock: </span><span><%= med['Stock'] %></span></li>
+            </ul>
+            <p class="row">
+              <a href="/inventory/edit?name=<%= encodeURI(med['Medicine_name']) %>" class="button small">Edit</a>
+              <a href="/inventory/delete?name=<%= encodeURI(med['Medicine_name']) %>" class="button small">Delete</a>
+            </p>
+          </div>
+        </div>
+      <% } %>
     </div>
-  <% } %>
-  <div class="">
-    <p><a href="/inventory/add">Add</a> new medicine to inventory</p>
+    <div class="row">
+      <a href="/inventory/add" class="button">Add medicine</a>
+    </div>
   </div>
 </main>
 <%- include('partials/footer') %>

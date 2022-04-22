@@ -1,5 +1,5 @@
 :root{
-  --primary-clr: 60e;
+  --primary-clr: #60e;
 }
 * {
   box-sizing: border-box;
@@ -20,19 +20,6 @@ label.valid {
 span.good {
   color: green;
 }
-body {
-  margin: 0;
-  padding: 1em;
-  height: 100%;
-  background-color: #f7f7f7;
-  display: block;
-}
-main {
-  display: block;
-}
-.center {
-  text-align: center;
-}
 .form-container {
   display: flex;
   align-items: center;
@@ -43,15 +30,14 @@ form {
   background-color: #fff;
   border: 1px solid #ddd;
   padding: 1em;
+  padding-bottom: 2em;
   border-radius: 5%;
   box-shadow: 0 5px 8px #aaa;
-  width: min(480px, 100%);
+  width: 480px;
+  max-width: 100%;
 }
 form.big {
-  width: min(640px, 100%);
-}
-form.hidden {
-  display: none;
+  width: 640px;
 }
 form > div {
   padding: 0.5em;
@@ -137,23 +123,8 @@ label.invalid::after {
 button {
   cursor: pointer;
 }
-.button {
-  color: #fff;
-  background-color: #60e;
-  padding: 0.5em 1em;
-  font-size: 1.2rem;
-  border-radius: 0.5em;
-  border: none;
-}
 .field .button {
   margin: 0.5em;
-}
-.button:hover {
-  outline: 1px solid #cbf;
-}
-.button:focus {
-  box-shadow: 0 0 5px 2px #cae;
-  outline: 1px solid #60e;
 }
 .btn-close {
   border: 0;
