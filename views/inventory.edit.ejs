@@ -22,8 +22,9 @@
       <div>
         <div class="field">
           <label>
-            <input type="text" name="name" placeholder="Medicine name" maxlength="40" value="<%= med['Medicine_name'] %>" />
+            <input type="text" name="name" placeholder="Medicine name" maxlength="40" value="<%= med['Medicine_name'] %>" readonly />
             <span>Medicine name:</span>
+            <i class="suffix-btn edit"></i>
           </label>
           <p><span class="error"></span><span class="counter"></span></p>
           <p><span class="hint"></span></p>
@@ -32,8 +33,9 @@
       <div>
         <div class="field">
           <label>
-            <input type="number" name="mrp" placeholder="MRP" value="<%= med['MRP'] %>" />
+            <input type="number" name="mrp" placeholder="MRP" value="<%= med['MRP'] %>" readonly />
             <span>MRP:</span>
+            <i class="suffix-btn edit"></i>
           </label>
           <p><span class="error"></span></p>
           <p><span class="hint"></span></p>
@@ -42,8 +44,9 @@
       <div>
         <div class="field">
           <label>
-            <input type="number" name="stock" placeholder="Stock" value="<%= med['Stock'] %>" />
+            <input type="number" name="stock" placeholder="Stock" value="<%= med['Stock'] %>" readonly />
             <span>Stock:</span>
+            <i class="suffix-btn edit"></i>
           </label>
           <p><span class="error"></span></p>
           <p><span class="hint"></span></p>

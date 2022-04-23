@@ -29,3 +29,14 @@ for (const span of counters) {
   });
   count(input);
 }
+const edits = document.querySelectorAll('i.suffix-btn.edit');
+for (const edit of edits) {
+  edit.addEventListener('click', function(e) {
+    let ele = this.parentElement.querySelector('input');
+    if (!ele) {
+      ele = this.parentElement.querySelector('textarea');
+    }
+    ele.removeAttribute('readonly');
+    this.remove();
+  });
+}

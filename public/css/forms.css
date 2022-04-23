@@ -143,17 +143,29 @@ button {
 .btn-close:hover {
   opacity: 1;
 }
-.field label i {
+label i {
   display: inline-block;
   width: 2em;
   height: 2em;
   background-size: cover;
 }
-i.suffix {
+i.suffix, i.suffix-btn {
   position: absolute;
   top: 0.5em;
   right: 0.5em;
   cursor: pointer;
+  border-radius: 0.2em;
+}
+label i.suffix-btn {
+  top: 0.3em;
+  right: -3em;
+  border: 1px solid #aaa;
+  width: 2.5em;
+  height: 2.5em;
+  background-size: 2em;
+  background-repeat: no-repeat;
+  background-position: 0.2em 0.2em;
+  background-color: #f5f5f5;
 }
 i.suffix + input {
   padding-right: 3em;
@@ -164,7 +176,9 @@ i.eye {
 i.eye-slash {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktZXllLXNsYXNoLWZpbGwiIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZD0ibTEwLjc5IDEyLjkxMi0xLjYxNC0xLjYxNWEzLjUgMy41IDAgMCAxLTQuNDc0LTQuNDc0bC0yLjA2LTIuMDZDLjkzOCA2LjI3OCAwIDggMCA4czMgNS41IDggNS41YTcuMDI5IDcuMDI5IDAgMCAwIDIuNzktLjU4OHpNNS4yMSAzLjA4OEE3LjAyOCA3LjAyOCAwIDAgMSA4IDIuNWM1IDAgOCA1LjUgOCA1LjVzLS45MzkgMS43MjEtMi42NDEgMy4yMzhsLTIuMDYyLTIuMDYyYTMuNSAzLjUgMCAwIDAtNC40NzQtNC40NzRMNS4yMSAzLjA4OXoiLz4KICA8cGF0aCBkPSJNNS41MjUgNy42NDZhMi41IDIuNSAwIDAgMCAyLjgyOSAyLjgyOWwtMi44My0yLjgyOXptNC45NS43MDgtMi44MjktMi44M2EyLjUgMi41IDAgMCAxIDIuODI5IDIuODI5em0zLjE3MSA2LTEyLTEyIC43MDgtLjcwOCAxMiAxMi0uNzA4LjcwOHoiLz4KPC9zdmc+);
 }
-
+i.edit {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMS4xIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMzYyLjcgMTkuMzJDMzg3LjctNS42NzggNDI4LjMtNS42NzggNDUzLjMgMTkuMzJMNDkyLjcgNTguNzVDNTE3LjcgODMuNzQgNTE3LjcgMTI0LjMgNDkyLjcgMTQ5LjNMNDQ0LjMgMTk3LjdMMzE0LjMgNjcuNzJMMzYyLjcgMTkuMzJ6TTQyMS43IDIyMC4zTDE4OC41IDQ1My40QzE3OC4xIDQ2My44IDE2NS4yIDQ3MS41IDE1MS4xIDQ3NS42TDMwLjc3IDUxMUMyMi4zNSA1MTMuNSAxMy4yNCA1MTEuMiA3LjAzIDUwNC4xQy44MTk4IDQ5OC44LTEuNTAyIDQ4OS43IC45NzYgNDgxLjJMMzYuMzcgMzYwLjlDNDAuNTMgMzQ2LjggNDguMTYgMzMzLjkgNTguNTcgMzIzLjVMMjkxLjcgOTAuMzRMNDIxLjcgMjIwLjN6Ii8+PC9zdmc+")
+}
 .alert {
   padding: 0.3rem;
   padding-right: 2rem;
