@@ -102,11 +102,17 @@ const add = async user => {
   }
 };
 
+const saveHintq = async (rid, obj) => {
+  const sql = 'UPDATE User_Accounts SET ? WHERE Retailer_id = ?';
+  await db.query(sql, [obj, rid]);
+};
+
 export default {
   verifyPassword,
   verifyById,
   changePassword,
   findHintQ,
   verifyAnswer,
-  add
+  add,
+  saveHintq
 };

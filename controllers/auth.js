@@ -93,10 +93,31 @@ const registerController = async (req, res) => {
   res.redirect('/auth/login');
 };
 
+const hintControllerPOST = async (req, res) => {
+  const obj = {
+    'Hint_question': req.body.hintq,
+    'Answer': req.body.ans
+  };
+  await User.saveHintq(req.user.rid, obj);
+  req.flash('success', 'Hint question changed successfully');
+  res.redirect('/profile/edit');
+};
+
+const deleteControllerPOST = async (req, res) => {
+  const result = await User.verifyById(req.body.old, req.user.rid);
+  if (result) {
+    await Retailer.del(req.user.rid);
+  }
+  req.flash('success', 'Account deleted successfully');
+  res.redirect('/auth/logout');
+};
+
 export {
   forgotControllerGET,
   forgotControllerPOST,
   changePasswordGET,
   changePasswordPOST,
-  registerController
+  registerController,
+  hintControllerPOST,
+  deleteControllerPOST
 };

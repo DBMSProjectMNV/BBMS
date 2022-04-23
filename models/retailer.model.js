@@ -64,8 +64,14 @@ const add = async ret => {
   }
 };
 
+const del = async rid => {
+  const sql = 'DELETE FROM Retailers WHERE Retailer_id = ?';
+  await db.query(sql, [rid]);
+};
+
 export default {
   find,
   save,
-  add
+  add,
+  del
 };

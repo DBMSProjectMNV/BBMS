@@ -15,7 +15,10 @@ CREATE TABLE User_Accounts (
 	Hint_question varchar(50),
 	Answer varchar(30),
 	Retailer_id varchar(10),
-	FOREIGN KEY (Retailer_id) REFERENCES Retailers(Retailer_id)
+	FOREIGN KEY (Retailer_id)
+		REFERENCES Retailers(Retailer_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE Inventory (
@@ -24,7 +27,10 @@ CREATE TABLE Inventory (
 	MRP int,
 	Stock int,
 	PRIMARY KEY (Retailer_id, Medicine_name),
-	FOREIGN KEY (Retailer_id) REFERENCES Retailers(Retailer_id)
+	FOREIGN KEY (Retailer_id)
+		REFERENCES Retailers(Retailer_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE Suppliers (
@@ -35,7 +41,10 @@ CREATE TABLE Suppliers (
 	Supplier_email varchar(50),
 	Supplier_address varchar(80),
 	PRIMARY KEY (Retailer_id, Supplier_id),
-	FOREIGN KEY (Retailer_id) REFERENCES Retailers(Retailer_id)
+	FOREIGN KEY (Retailer_id)
+		REFERENCES Retailers(Retailer_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE Orders (
@@ -48,7 +57,10 @@ CREATE TABLE Orders (
 	Supplier_id varchar(10),
 	Order_status enum("COMPLETED","PENDING","CANCELLED"),
 	PRIMARY KEY (Retailer_id, Order_id),
-	FOREIGN KEY (Retailer_id, Supplier_id) REFERENCES Suppliers(Retailer_id, Supplier_id)
+	FOREIGN KEY (Retailer_id, Supplier_id)
+		REFERENCES Suppliers(Retailer_id, Supplier_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE Staffs (
@@ -61,7 +73,10 @@ CREATE TABLE Staffs (
 	Job_role varchar(25),
 	Salary int,
 	PRIMARY KEY (Retailer_id, Staff_id),
-	FOREIGN KEY (Retailer_id) REFERENCES Retailers(Retailer_id)
+	FOREIGN KEY (Retailer_id)
+		REFERENCES Retailers(Retailer_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 INSERT INTO Retailers VALUES

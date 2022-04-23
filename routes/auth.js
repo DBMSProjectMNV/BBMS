@@ -8,7 +8,9 @@ import {
   forgotControllerGET,
   changePasswordGET,
   changePasswordPOST,
-  registerController
+  registerController,
+  hintControllerPOST,
+  deleteControllerPOST
 } from '../controllers/auth.js';
 const router = Router();
 
@@ -56,8 +58,16 @@ router.get('/auth/forgot', forgotControllerGET);
 router.post('/auth/forgot', forgotControllerPOST);
 
 router.get('/auth/logout', (req, res) => {
+  const successes = req.flash('success');
+  const errors = req.flash('errors');
   req.logout();
   req.flash('success', 'Logout successful');
+  for (const msg of successes) {
+    req.flash('success', msg);
+  }
+  for (const msg of errors) {
+    req.flash('error', msg);
+  }
   res.redirect('/auth/login');
 });
 
@@ -81,8 +91,11 @@ router.post(
 router.get('/auth/hint', checkLogin, (req, res) => {
   res.render('changeHintq.ejs');
 });
+router.post('/auth/hint', checkLogin, hintControllerPOST);
+
 router.get('/auth/delete', checkLogin, (req, res) => {
   res.render('delete.ejs');
 });
+router.post('/auth/delete', checkLogin, deleteControllerPOST);
 
 export default router;
