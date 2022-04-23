@@ -1,13 +1,70 @@
 <%- include('partials/header'); %>
-<title>Add supplier</title>
+  <title>Add supplier</title>
+	<link rel="stylesheet" href="/css/forms.css" />
+	<script src="/js/forms.js" defer></script>
 <%- include('partials/layout'); %>
 <main>
-  <form action="/suppliers/add" method="post">
-    <p>Name: <input type="text" name="name" />
-    <p>Contact: <input type="text" name="contact" />
-    <p>Email: <input type="text" name="email" />
-    <p>Address: <input type="text" name="address" />
-    <p><button>Submit</button></p>
-  </form>
+	<div class="form-container">
+		<form action="/suppliers/add" method="post">
+			<div>
+				<h2 class="center">Add supplier</h2>
+			</div>
+      <div>
+        <% if (locals.error) { %>
+          <% for (const message of error) { %>
+            <div class="alert error">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="name" placeholder="Supplier name" maxlength="40" <% if(locals.name){ %> value="<%= name %>" <% } %> />
+            <span>Supplier name:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="contact" placeholder="Supplier contact" maxlength="40" <% if(locals.contact){ %> value="<%= contact %>" <% } %> />
+            <span>Supplier contact:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="email" placeholder="Supplier email" maxlength="40" <% if(locals.email){ %> value="<%= email %>" <% } %> />
+            <span>Supplier email:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="address" placeholder="Supplier address" maxlength="40" <% if(locals.address){ %> value="<%= address %>" <% } %> />
+            <span>Supplier address:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <button class="button">Submit</button>
+        </div>
+      </div>
+		</form>
+	</div>
 </main>
 <%- include('partials/footer') %>
