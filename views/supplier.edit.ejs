@@ -1,23 +1,74 @@
 <%- include('partials/header'); %>
-<title>Edit <%= sup['Supplier_name'] %></title>
+  <title>Edit <%= sup['Supplier_name'] %></title>
+	<link rel="stylesheet" href="/css/forms.css" />
+	<script src="/js/forms.js" defer></script>
 <%- include('partials/layout'); %>
 <main>
-  <form action="/suppliers/edit?id=<%= sup['Supplier_id'] %>" method="post">
-    <p>Name: <input type="text" name="name" value="<%= sup['Supplier_name'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p>Contact: <input type="text" name="contact" value="<%= sup['Supplier_contact'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p>Email: <input type="text" name="email" value="<%= sup['Supplier_email'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p>Address: <input type="text" name="address" value="<%= sup['Supplier_address'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p><button>Submit</button></p>
-  </form>
+	<div class="form-container">
+    <form action="/suppliers/edit?id=<%= sup['Supplier_id'] %>" method="post">
+			<div>
+				<h2 class="center">Edit Supplier</h2>
+			</div>
+      <div>
+        <% if (locals.error) { %>
+          <% for (const message of error) { %>
+            <div class="alert error">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="name" placeholder="Supplier name" maxlength="40" value="<%= sup['Supplier_name'] %>" readonly />
+            <span>Supplier name:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="contact" placeholder="Supplier contact" maxlength="40" value="<%= sup['Supplier_contact'] %>" readonly />
+            <span>Supplier contact:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="email" placeholder="Supplier email" maxlength="40" value="<%= sup['Supplier_email'] %>" readonly />
+            <span>Supplier email:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="address" placeholder="Supplier address" maxlength="40" value="<%= sup['Supplier_address'] %>" readonly />
+            <span>Supplier address:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <button class="button">Submit</button>
+        </div>
+      </div>
+		</form>
+	</div>
 </main>
-<script type="text/javascript">
-  const btns = document.querySelectorAll('span.toggle a');
-  for(const a of btns) {
-    a.addEventListener('click', function() {
-      const input = this.parentElement.parentElement.querySelector('input');
-      const bool = input.hasAttribute('disabled');
-      bool ? input.removeAttribute('disabled') : input.setAttribute('disabled', true);
-    });
-  }
-</script>
 <%- include('partials/footer') %>

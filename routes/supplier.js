@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import { checkLogin } from '../middlewares/auth.js';
 import Supplier from '../models/supplier.model.js';
+import validator from '../middlewares/validators/supplier.js';
 const router = Router();
+
+const fields = ['name', 'contact', 'email', 'address'];
 
 router.get(
   '/suppliers/',
@@ -15,17 +18,22 @@ router.get(
 router.get(
   '/suppliers/edit',
   checkLogin,
-  async (req, res) => {
+  async (req, res, next) => {
     const sup = await Supplier.find(req.user.rid, req.query.id);
-    res.render('supplier.edit.ejs', { sup });
+    if (sup) {
+      res.locals.error = req.flash('error');
+      res.render('supplier.edit.ejs', { sup });
+    } else {
+      next();
+    }
   }
 );
 
 router.post(
   '/suppliers/edit',
   checkLogin,
+  validator,
   async (req, res) => {
-    const fields = ['name', 'contact', 'email', 'address'];
     const supplier = {};
     for (const col of fields) {
       if (req.body[col]) {
@@ -49,12 +57,17 @@ router.get(
 );
 
 router.get('/suppliers/add', checkLogin, (req, res) => {
+  res.locals.error = req.flash('error');
+  for (const col of fields) {
+    [res.locals[col]] = req.flash(col);
+  }
   res.render('supplier.add.ejs');
 });
 
 router.post(
   '/suppliers/add',
   checkLogin,
+  validator,
   async (req, res) => {
     const sup = {
       'Retailer_id': req.user.rid,
