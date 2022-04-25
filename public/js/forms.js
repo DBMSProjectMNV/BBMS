@@ -31,7 +31,7 @@ for (const span of counters) {
 }
 const edits = document.querySelectorAll('i.suffix-btn.edit');
 for (const edit of edits) {
-  edit.addEventListener('click', function(e) {
+  edit.addEventListener('click', function () {
     let ele = this.parentElement.querySelector('input');
     if (!ele) {
       ele = this.parentElement.querySelector('textarea');
