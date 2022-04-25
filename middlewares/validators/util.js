@@ -22,7 +22,7 @@ const name = body('name', 'invalid name')
   .withMessage('name must be atmost 25 characters long and non empty')
   .customSanitizer(value => value.toLowerCase()); // all lower case
 
-const password = body('password', 'invalid password')
+const passwordGen = field => body(field, 'invalid password')
   .trim()
   .isLength({ min: 8 }) // password : 8 to 32
   .withMessage('Password should be atleast 8 characters long')
@@ -58,6 +58,22 @@ const address = body('address', 'invalid address')
   .customSanitizer(value => value.toLowerCase());
   // :aA0-: "." "'" "#" "%" "@" "&" "/" " "
 
+const hintq = body('hintq', 'invalid hint question')
+  .trim()
+  .isLength({ min: 1 })
+  .withMessage('Hint question should be non empty')
+  .isLength({ max: 40 })
+  .withMessage('Hint question should be at most 40 characters long')
+  .customSanitizer(value => value.toLowerCase());
+
+const answer = body('answer', 'invalid hint answer')
+  .trim()
+  .isLength({ min: 1 })
+  .withMessage('Answer should be non empty')
+  .isLength({ max: 25 })
+  .withMessage('Answer should be max 25 characters long')
+  .customSanitizer(value => value.toLowerCase());
+
 const resultGen = (params, url) => (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -75,10 +91,12 @@ const resultGen = (params, url) => (req, res, next) => {
 
 export {
   username,
-  password,
+  passwordGen,
   contact,
   email,
   address,
   name,
-  resultGen
+  resultGen,
+  hintq,
+  answer
 };

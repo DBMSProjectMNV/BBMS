@@ -4,6 +4,12 @@ import { checkLogin } from '../middlewares/auth.js';
 import loginValidator from '../middlewares/validators/login.js';
 import registerValidator from '../middlewares/validators/register.js';
 import {
+  hintq,
+  answer,
+  passwordGen,
+  resultGen
+} from '../middlewares/validators/util.js';
+import {
   forgotControllerPOST,
   forgotControllerGET,
   changePasswordGET,
@@ -54,7 +60,11 @@ router.get('/auth/register', (req, res) => {
 });
 router.post('/auth/register', registerValidator, registerController);
 
-router.get('/auth/forgot', forgotControllerGET);
+router.get(
+  '/auth/forgot',
+  [answer, passwordGen('password'), resultGen(['answer', 'password'])],
+  forgotControllerGET
+);
 router.post('/auth/forgot', forgotControllerPOST);
 
 router.get('/auth/logout', (req, res) => {
@@ -72,7 +82,11 @@ router.get('/auth/logout', (req, res) => {
 });
 
 router.get('/auth/change', changePasswordGET);
-router.post('/auth/change', changePasswordPOST);
+router.post(
+  '/auth/change',
+  [passwordGen('old'), passwordGen('password'), resultGen(['old', 'password'])],
+  changePasswordPOST
+);
 
 router.post(
   '/auth/login',
@@ -89,13 +103,28 @@ router.post(
 );
 
 router.get('/auth/hint', checkLogin, (req, res) => {
+  res.locals.error = req.flash('error');
+  [res.locals.hintq] = req.flash('hintq');
+  [res.locals.answer] = req.flash('answer');
   res.render('changeHintq.ejs');
 });
-router.post('/auth/hint', checkLogin, hintControllerPOST);
+router.post(
+  '/auth/hint',
+  checkLogin,
+  [hintq, answer, resultGen(['hintq', 'answer'])],
+  hintControllerPOST
+);
 
 router.get('/auth/delete', checkLogin, (req, res) => {
+  res.locals.error = req.flash('error');
+  [res.locals.old] = req.flash('old');
   res.render('delete.ejs');
 });
-router.post('/auth/delete', checkLogin, deleteControllerPOST);
+router.post(
+  '/auth/delete',
+  checkLogin,
+  [passwordGen('old'), resultGen(['old'])],
+  deleteControllerPOST
+);
 
 export default router;
