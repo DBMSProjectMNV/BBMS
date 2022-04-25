@@ -14,12 +14,12 @@ const jobrole = body('jobrole', 'invalid job role')
   .isAscii()
   .withMessage('Invalid characters for job role');
 
-export default url => [
+export default [
   name,
   contact,
   email,
   address,
   jobrole,
   salary,
-  resultGen(params, url)
+  resultGen(params)
 ];

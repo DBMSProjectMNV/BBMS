@@ -1,25 +1,96 @@
 <%- include('partials/header'); %>
-<title>Edit <%= staff['Staff_name'] %></title>
+  <title>Edit <%= staff['Staff_name'] %></title>
+	<link rel="stylesheet" href="/css/forms.css" />
+	<script src="/js/forms.js" defer></script>
 <%- include('partials/layout'); %>
 <main>
-  <form action="/staffs/edit?id=<%= staff['Staff_id'] %>" method="post">
-    <p>Name: <input type="text" name="name" value="<%= staff['Staff_name'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p>Contact: <input type="text" name="contact" value="<%= staff['Staff_contact'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p>Email: <input type="text" name="email" value="<%= staff['Staff_email'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p>Address: <input type="text" name="address" value="<%= staff['Staff_address'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p>Job Role: <input type="text" name="jobrole" value="<%= staff['Job_role'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p>Salary: <input type="text" name="salary" value="<%= staff['Salary'] %>" disabled />    <span class="toggle"><a href="#!" onclick="">#</a></span></p>
-    <p><button>Submit</button></p>
-  </form>
+	<div class="form-container">
+    <form action="/staffs/edit?id=<%= staff['Staff_id'] %>" method="post" class="big">
+			<div>
+				<h2 class="center">Edit Staff</h2>
+			</div>
+      <div>
+        <% if (locals.error) { %>
+          <% for (const message of error) { %>
+            <div class="alert error">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="name" placeholder="Staff name" maxlength="40" value="<%= staff['Staff_name'] %>" readonly />
+            <span>Staff name:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="contact" placeholder="Staff contact" maxlength="40" value="<%= staff['Staff_contact'] %>" readonly />
+            <span>Staff contact:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="email" placeholder="Staff email" maxlength="40" value="<%= staff['Staff_email'] %>" readonly />
+            <span>Staff email:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="address" placeholder="Staff address" maxlength="40" value="<%= staff['Staff_address'] %>" readonly />
+            <span>Staff address:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="jobrole" placeholder="Job role" maxlength="40" value="<%= staff['Job_role'] %>" readonly />
+            <span>Job role:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="salary" placeholder="Salary" maxlength="40" value="<%= staff['Salary'] %>" readonly />
+            <span>Salary:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <button class="button">Submit</button>
+        </div>
+      </div>
+		</form>
+	</div>
 </main>
-<script type="text/javascript">
-  const btns = document.querySelectorAll('span.toggle a');
-  for(const a of btns) {
-    a.addEventListener('click', function() {
-      const input = this.parentElement.parentElement.querySelector('input');
-      const bool = input.hasAttribute('disabled');
-      bool ? input.removeAttribute('disabled') : input.setAttribute('disabled', true);
-    });
-  }
-</script>
 <%- include('partials/footer') %>
