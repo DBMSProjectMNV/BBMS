@@ -1,4 +1,4 @@
-const { helper } = window;
+let { helper } = window;
 function validateUsername (uname) {
   if (uname.length === 0) {
     return 'empty';

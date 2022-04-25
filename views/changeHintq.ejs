@@ -24,7 +24,7 @@
       <div>
         <div class="field">
           <label>
-            <textarea name="hintq" placeholder="Hint question" maxlength="40" <%= locals.hintq && `value="${hintq}"` %>></textarea>
+            <textarea name="hintq" placeholder="Hint question" maxlength="40"><%= locals.hintq ?? '' %></textarea>
             <span>Hint question:</span>
           </label>
           <p><span class="error"></span> <span class="counter"></span> </p>
@@ -34,7 +34,7 @@
       <div>
         <div class="field">
           <label>
-            <textarea name="answer" placeholder="Answer to hint question" maxlength="25" <%= locals.answer && `value="${answer}"` %>></textarea>
+            <textarea name="answer" placeholder="Answer to hint question" maxlength="25"><%= locals.answer %></textarea>
             <span>Answer:</span>
           </label>
           <p><span class="error"></span> <span class="counter"></span> </p>

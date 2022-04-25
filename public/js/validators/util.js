@@ -1,4 +1,4 @@
-const { helper } = window;
+let { helper } = window;
 const inpName = document.querySelector('input[name="name"]');
 if (inpName) {
   inpName.addEventListener('change', function () {

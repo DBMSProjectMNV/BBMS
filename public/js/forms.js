@@ -36,6 +36,7 @@ for (const edit of edits) {
     if (!ele) {
       ele = this.parentElement.querySelector('textarea');
     }
+    this.closest('.field').querySelector('.counter').classList.remove('hidden');
     ele.removeAttribute('readonly');
     this.remove();
   });
