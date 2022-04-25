@@ -79,6 +79,10 @@ textarea {
 .field input:focus, .field textarea:focus {
   outline: 1px solid var(--validity-clr, #60e);
 }
+.field input[readonly], .field textarea[readonly] {
+  border-color: transparent;
+  outline-color: transparent;
+}
 .field p {
   display: flex;
 }
