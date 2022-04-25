@@ -1,4 +1,3 @@
-import { body } from 'express-validator';
 import {
   name,
   passwordGen,

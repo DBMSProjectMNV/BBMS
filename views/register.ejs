@@ -24,7 +24,7 @@
       <div>
         <div class="field">
           <label>
-            <input type="text" name="name" placeholder="Username" maxlength="25" <%= locals.name && `value="${name}"` %> />
+            <input type="text" name="name" placeholder="Username" maxlength="25" <% if (locals.name) { %> value="<%= name %>" <% } %> />
             <span>Username:</span>
           </label>
           <p><span class="error"></span><span class="counter"></span></p>
@@ -45,7 +45,7 @@
       <div>
         <div class="field">
           <label>
-            <textarea name="hintq" placeholder="Hint question" maxlength="40" <%= locals.hintq && `value="${hintq}"` %>></textarea>
+            <textarea name="hintq" placeholder="Hint question" maxlength="40"><%= locals.hintq ?? '' %></textarea>
             <span>Hint question:</span>
           </label>
           <p><span class="error"></span> <span class="counter"></span> </p>
@@ -55,7 +55,7 @@
       <div>
         <div class="field">
           <label>
-            <textarea name="answer" placeholder="Answer to hint question" maxlength="25" <%= locals.answer && `value="${answer}"` %>></textarea>
+            <textarea name="answer" placeholder="Answer to hint question" maxlength="25"><%= locals.answer ?? '' %></textarea>
             <span>Answer:</span>
           </label>
           <p><span class="error"></span> <span class="counter"></span> </p>
@@ -65,7 +65,7 @@
       <div>
         <div class="field">
           <label>
-            <input type="text" name="contact" placeholder="Contact number" maxlength="10" <%= locals.contact && `value="${contact}"` %> />
+            <input type="text" name="contact" placeholder="Contact number" maxlength="10" <% if (locals.contact) { %> value="<%= contact %>" <% } %> />
             <span>Contact:</span>
           </label>
           <p><span class="error"></span> <span class="counter"></span></p>
@@ -75,7 +75,7 @@
       <div>
         <div class="field">
           <label>
-            <input type="email" name="email" placeholder="Email address" maxlength="40" <%= locals.email && `value="${email}"` %> />
+            <input type="email" name="email" placeholder="Email address" maxlength="40" <% if (locals.email) { %> value="<%= email %>" <% } %> />
             <span>Email:</span>
           </label>
           <p><span class="error"></span> <span class="counter"></span></p>
@@ -85,7 +85,7 @@
       <div>
         <div class="field">
           <label>
-            <textarea name="address" placeholder="Address" maxlength="75" <%= locals.address && `value="${address}"` %>></textarea>
+            <textarea name="address" placeholder="Address" maxlength="75"><%= locals.address ?? '' %></textarea>
             <span>Address:</span>
           </label>
           <p><span class="error"></span> <span class="counter"></span></p>

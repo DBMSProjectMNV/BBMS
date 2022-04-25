@@ -33,7 +33,7 @@
       <div>
         <div class="field">
           <label>
-            <input type="text" name="username" placeholder="Username" maxlength="25" <%= locals.username && 'value=' + username %> />
+            <input type="text" name="username" placeholder="Username" maxlength="25" <% if (locals.username) { %> value="<%= username %>" <% } %> />
             <span>Username:</span>
           </label>
           <p><span class="error"></span><span class="counter"></span></p>
@@ -80,7 +80,7 @@
       <div>
         <div class="field">
           <label>
-            <input type="text" name="username" placeholder="Username" maxlength="25" />
+            <input type="text" name="username" placeholder="Username" maxlength="25" <% if (locals.username) { %> value="<%= username %>" <% } %> />
             <span>Username:</span>
           </label>
           <p><span class="error"></span><span class="counter"></span></p>

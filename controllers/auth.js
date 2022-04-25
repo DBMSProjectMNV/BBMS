@@ -1,7 +1,6 @@
 import { checkLogin } from '../middlewares/auth.js';
 import User from '../models/user.model.js';
 import Retailer from '../models/retailer.model.js';
-import { passwordGen, resultGen } from '../middlewares/validators/util.js';
 
 const forgotControllerPOST = async (req, res) => {
   const { rid } = req.body;
@@ -104,7 +103,7 @@ const deleteControllerPOST = async (req, res) => {
     req.flash('success', 'Account deleted successfully');
     res.redirect('/auth/logout');
   } else {
-    req.flash('error','Invalid password');
+    req.flash('error', 'Invalid password');
     res.redirect('/auth/delete');
   }
 };
