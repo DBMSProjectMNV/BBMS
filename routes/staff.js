@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { checkLogin } from '../middlewares/auth.js';
 import Staff from '../models/staff.model.js';
+import validator from '../middlewares/validators/staff.js';
 const router = Router();
 
 router.get(
@@ -15,15 +16,21 @@ router.get(
 router.get(
   '/staffs/edit',
   checkLogin,
-  async (req, res) => {
+  async (req, res, next) => {
     const staff = await Staff.find(req.user.rid, req.query.id);
-    res.render('staff.edit.ejs', { staff });
+    if (staff) {
+      res.locals.error = req.flash('error');
+      res.render('staff.edit.ejs', { staff });
+    } else {
+      next();
+    }
   }
 );
 
 router.post(
   '/staffs/edit',
   checkLogin,
+  validator,
   async (req, res) => {
     const fields = ['name', 'contact', 'email', 'address'];
     const staff = {};
@@ -55,10 +62,15 @@ router.get(
 );
 
 router.get('/staffs/add', checkLogin, (req, res) => {
+  const fields = ['name', 'contact', 'email', 'address', 'salary', 'jobrole'];
+  for (const col of fields) {
+    [res.locals[col]] = req.flash(col);
+  }
+  res.locals.error = req.flash('error');
   res.render('staff.add.ejs');
 });
 
-router.post('/staffs/add', checkLogin, async (req, res) => {
+router.post('/staffs/add', checkLogin, validator, async (req, res) => {
   const staff = {
     'Retailer_id': req.user.rid,
     'Staff_name': req.body.name,
