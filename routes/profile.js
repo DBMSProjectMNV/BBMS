@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import { checkLogin } from '../middlewares/auth.js';
 import Retailer from '../models/retailer.model.js';
+import validator from '../middlewares/validators/retailer.js';
 const router = Router();
 
+const fields = ['name', 'contact', 'email', 'address'];
 router.get('/profile', (req, res) => {
   res.redirect('/profile/edit');
 });
@@ -14,8 +16,7 @@ router.get('/profile/edit', checkLogin, async (req, res) => {
   res.render('profile.edit.ejs', { ret });
 });
 
-router.post('/profile/edit', checkLogin, async (req, res) => {
-  const fields = ['name', 'contact', 'email', 'address'];
+router.post('/profile/edit', checkLogin, validator, async (req, res) => {
   const ret = {};
   for (const col of fields) {
     if (req.body[col]) {
@@ -43,11 +44,10 @@ router.get(
     next();
   },
   async (req, res, next) => {
-    try {
-      const ret = await Retailer.find(req.params.name, 'name');
+    const ret = await Retailer.find(req.params.name, 'name');
+    if (ret) {
       res.render('profile.ejs', { ret });
-    } catch (error) {
-      console.log(error);
+    } else {
       next();
     }
   }
