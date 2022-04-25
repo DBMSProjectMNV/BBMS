@@ -1,12 +1,65 @@
 <%- include('partials/header'); %>
-<title><%= ret['Retailer_name'] %></title>
+  <title><%= ret['Retailer_name'] %></title>
+	<link rel="stylesheet" href="/css/forms.css" />
+	<script src="/js/forms.js" defer></script>
 <%- include('partials/layout'); %>
 <main>
-  <div>
-    <p><span>Name: </span><span><%= ret['Retailer_name'] %></span></p>
-    <p><span>Contact: </span><span><%= ret['Retailer_contact'] %></span></p>
-    <p><span>Email: </span><span><%= ret['Retailer_email'] %></span></p>
-    <p><span>Address: </span><span><%= ret['Retailer_address'] %></span></p>
-  </div>
+	<div class="form-container">
+    <form action="/profile/edit" method="post">
+			<div>
+				<h2 class="center"><%= ret['Retailer_name'] %></h2>
+			</div>
+      <div>
+        <% if (locals.error) { %>
+          <% for (const message of error) { %>
+            <div class="alert error">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="name" placeholder="Retailer name" maxlength="40" value="<%= ret['Retailer_name'] %>" readonly />
+            <span>Retailer name:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="contact" placeholder="Retailer contact" maxlength="40" value="<%= ret['Retailer_contact'] %>" readonly />
+            <span>Retailer contact:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="email" placeholder="Retailer email" maxlength="40" value="<%= ret['Retailer_email'] %>" readonly />
+            <span>Retailer email:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="address" placeholder="Retailer address" maxlength="40" value="<%= ret['Retailer_address'] %>" readonly />
+            <span>Retailer address:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+		</form>
+	</div>
 </main>
 <%- include('partials/footer') %>
