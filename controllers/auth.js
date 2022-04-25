@@ -1,22 +1,18 @@
 import { checkLogin } from '../middlewares/auth.js';
 import User from '../models/user.model.js';
 import Retailer from '../models/retailer.model.js';
+import { passwordGen, resultGen } from '../middlewares/validators/util.js';
 
 const forgotControllerPOST = async (req, res) => {
   const { rid } = req.body;
-  const { ans } = req.body;
+  const { answer } = req.body;
   const { password } = req.body;
-  try {
-    const yes = await User.verifyAnswer(rid, ans);
-    if (!yes) {
-      res.end('Invalid answer');
-    } else {
-      await User.changePassword(password, rid);
-      res.end('Password change successful');
-    }
-  } catch (error) {
-    console.log(error);
-    res.end('some error');
+  const yes = await User.verifyAnswer(rid, answer);
+  if (!yes) {
+    res.end('Invalid answer');
+  } else {
+    await User.changePassword(password, rid);
+    res.end('Password change successful');
   }
 };
 
@@ -27,7 +23,7 @@ const forgotControllerGET = async (req, res) => {
   }
   if (!req.query.username) {
     req.flash('error', 'Invalid username');
-    res.redirect('/auth/login');
+    res.redirect('/auth/login#forgot');
     return;
   }
   try {
@@ -44,6 +40,7 @@ const changePasswordGET = [
   (req, res) => {
     if (req.user && req.user.rid) {
       res.locals.rid = req.user.rid;
+      res.locals.error = req.flash('error');
       res.render('changePass.ejs');
     } else {
       req.flash('error', 'Please login to continue');
@@ -60,18 +57,15 @@ const changePasswordPOST = async (req, res, next) => {
   if (rid !== req.user.rid) {
     return next({ code: 400, desc: 'Bad request', content: 'rid malformed' });
   }
-  try {
-    const yes = await User.verifyById(old, rid);
-    if (!yes) {
-      res.end('Old password incorrect');
-      return;
-    }
-    await User.changePassword(password, rid);
-    res.end('Password changed successfully');
-  } catch (error) {
-    console.log(error);
-    res.end('some error occurred');
+  const yes = await User.verifyById(old, rid);
+  if (!yes) {
+    req.flash('Old password incorrect');
+    res.redirect('/auth/change');
+    return;
   }
+  await User.changePassword(password, rid);
+  req.flash('success', 'Password changed successfully');
+  res.redirect('/profile/edit');
 };
 
 const registerController = async (req, res) => {
@@ -96,7 +90,7 @@ const registerController = async (req, res) => {
 const hintControllerPOST = async (req, res) => {
   const obj = {
     'Hint_question': req.body.hintq,
-    'Answer': req.body.ans
+    'Answer': req.body.answer
   };
   await User.saveHintq(req.user.rid, obj);
   req.flash('success', 'Hint question changed successfully');
@@ -107,9 +101,12 @@ const deleteControllerPOST = async (req, res) => {
   const result = await User.verifyById(req.body.old, req.user.rid);
   if (result) {
     await Retailer.del(req.user.rid);
+    req.flash('success', 'Account deleted successfully');
+    res.redirect('/auth/logout');
+  } else {
+    req.flash('error','Invalid password');
+    res.redirect('/auth/delete');
   }
-  req.flash('success', 'Account deleted successfully');
-  res.redirect('/auth/logout');
 };
 
 export {

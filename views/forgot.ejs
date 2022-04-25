@@ -1,17 +1,54 @@
 <%- include('partials/header'); %>
 <title>Forgot password</title>
+<link rel="stylesheet" href="/css/forms.css" />
+<script src="/js/forms.js" defer></script>
+<script src="/js/login.js" defer></script>
 <%- include('partials/layout'); %>
 <main>
-  <% if (locals.error) { %>
-    <p>Error: <%= error %></p>
-  <% } else { %>
+  <div class="form-container">
     <form action="/auth/forgot" method="post">
       <input type="hidden" name="rid" value="<%= rid %>" />
-      <p>Hint question: <%= hintq %></p>
-      <p>Answer: <input type="text" name="ans" /></p>
-      <p>New password: <input type="password" name="password" /></p>
-      <p><button>Submit</button></p>
+      <div>
+        <h2 class="center error">Forgot password</h2>
+      </div>
+      <div>
+        <% if (locals.error) { %>
+          <% for (const message of error) { %>
+            <div class="alert error">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <i class="eye suffix password"></i>
+            <input type="password" name="old" placeholder="Old password" maxlength="32" value="" />
+            <span>Old password:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <i class="eye suffix password"></i>
+            <input type="password" name="password" placeholder="New password" maxlength="32" value="" />
+            <span>New password:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <button class="button">Submit</button>
+        </div>
+      </div>
     </form>
-  <% } %>
+  </div>
 </main>
-<%- include('partials/footer') %>
+<%- include('partials/footer'); %>

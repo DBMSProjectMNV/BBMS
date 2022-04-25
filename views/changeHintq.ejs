@@ -1,11 +1,52 @@
 <%- include('partials/header'); %>
-<title>Change Hint question</title>
+  <title>Change Hint question</title>
+  <link rel="stylesheet" href="/css/forms.css" />
+  <script src="/js/forms.js" defer></script>
+  <script src="/js/login.js" defer></script>
+  <script src="/js/validators/util.js" defer></script>
 <%- include('partials/layout'); %>
 <main>
-  <form action="/auth/hint" method="post">
-    <p>Hint question:</p><textarea name="hintq"></textarea>
-    <p>Answer:</p><textarea name="ans"></textarea>
-    <p><button>Submit</button></p>
-  </form>
+  <div class="form-container">
+    <form action="/auth/hint" method="post">
+      <div>
+        <h2 class="center">Hint question</h2>
+      </div>
+      <div>
+        <% if (locals.error) { %>
+          <% for (const message of error) { %>
+            <div class="alert error">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <textarea name="hintq" placeholder="Hint question" maxlength="40" <%= locals.hintq && `value="${hintq}"` %>></textarea>
+            <span>Hint question:</span>
+          </label>
+          <p><span class="error"></span> <span class="counter"></span> </p>
+          <p><span class="hint">at most 40 characters long</span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <textarea name="answer" placeholder="Answer to hint question" maxlength="25" <%= locals.answer && `value="${answer}"` %>></textarea>
+            <span>Answer:</span>
+          </label>
+          <p><span class="error"></span> <span class="counter"></span> </p>
+          <p><span class="hint">at most 25 characters long</span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <button class="button">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </main>
-<%- include('partials/footer') %>
+<%- include('partials/footer'); %>

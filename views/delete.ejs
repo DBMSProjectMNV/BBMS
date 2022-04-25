@@ -1,10 +1,42 @@
 <%- include('partials/header'); %>
 <title>Delete account</title>
+<link rel="stylesheet" href="/css/forms.css" />
+<script src="/js/forms.js" defer></script>
+<script src="/js/login.js" defer></script>
 <%- include('partials/layout'); %>
 <main>
-  <form action="/auth/delete" method="post">
-    <p>Old password: <input type="password" name="old" /></p>
-    <p><button>Delete</button></p>
-  </form>
+  <div class="form-container">
+    <form action="/auth/delete" method="post">
+      <div>
+        <h2 class="center error">Delete account</h2>
+      </div>
+      <div>
+        <% if (locals.error) { %>
+          <% for (const message of error) { %>
+            <div class="alert error">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <i class="eye suffix password"></i>
+            <input type="password" name="old" placeholder="Old password" maxlength="32" value="" />
+            <span>Old password:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <button class="button danger">Delete</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </main>
-<%- include('partials/footer') %>
+<%- include('partials/footer'); %>
