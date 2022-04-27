@@ -61,11 +61,11 @@ textarea {
   margin: 0.2em;
   width: 80%;
 }
-.field label span, .field label input, .field label textarea {
+.field label span, .field label input, .field label textarea, .field label select {
   font-family: Serif;
   font-size: 1em;
 }
-.field input, .field textarea {
+.field input, .field textarea, .field select {
   background-color: transparent;
   border: 1px inset var(--validity-clr, #aaa);
   border-radius: 0.5em;

@@ -49,14 +49,14 @@ CREATE TABLE Suppliers (
 
 CREATE TABLE Orders (
 	Retailer_id varchar(10),
-	Order_id varchar(10),
+	Order_id int NOT NULL AUTO_INCREMENT,
 	Medicine_name varchar(50),
 	Quantity int,
 	MRP int,
 	Order_date date,
 	Supplier_id varchar(10),
 	Order_status enum("COMPLETED","PENDING","CANCELLED"),
-	PRIMARY KEY (Retailer_id, Order_id),
+	PRIMARY KEY (Order_id),
 	FOREIGN KEY (Retailer_id, Supplier_id)
 		REFERENCES Suppliers(Retailer_id, Supplier_id)
 		ON DELETE CASCADE
@@ -107,7 +107,10 @@ INSERT INTO Suppliers VALUES
 ("103", "2", "Praveen", "9871989942", "praveen@shop.com", "praveen address");
 
 INSERT INTO Inventory VALUES
-("101","Paracetemol",100.0,5);
+("101","Paracetemol",100,5);
+
+INSERT INTO Orders VALUES
+("102", NULL, "meidicine", 43, 25, "2022/02/25", "1", "PENDING");
 
 CREATE USER 'project'@'localhost' IDENTIFIED BY 'iampassword';
 GRANT SELECT, INSERT, UPDATE, DELETE ON medstore.* TO 'project'@'localhost';

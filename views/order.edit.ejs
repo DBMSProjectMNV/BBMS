@@ -1,0 +1,89 @@
+<%- include('partials/header'); %>
+  <title>Order <%= order['Order_id'] %></title>
+	<link rel="stylesheet" href="/css/forms.css" />
+	<script src="/js/forms.js" defer></script>
+<%- include('partials/layout'); %>
+<main>
+	<div class="form-container">
+    <form action="/orders/edit?id=<%= order['Order_id'] %>" method="post" class="big">
+      <input type="hidden" name="id" value="<%= order['Order_id'] %>" />
+			<div>
+				<h2 class="center">Order <%= order['Order_id'] %></h2>
+			</div>
+      <div>
+        <% if (locals.error) { %>
+          <% for (const message of error) { %>
+            <div class="alert error">
+              <p><%= message %></p>
+              <button type="button" class="btn-close"></button>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="text" name="medname" placeholder="Medicine name" maxlength="40" value="<%= order['Medicine_name'] %>" readonly />
+            <span>Medicine name:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span><span class="counter hidden"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="number" name="quantity" placeholder="Quantity" maxlength="40" value="<%= order['Quantity'] %>" readonly />
+            <span>Quantity:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="number" name="mrp" placeholder="Price" value="<%= order['MRP'] %>" readonly />
+            <span>Price:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <input type="date" name="ordate" placeholder="Order date" value="<%= order['Order_date'].toLocaleDateString('en-CA') %>" readonly />
+            <span>Order date:</span>
+            <i class="suffix-btn edit"></i>
+          </label>
+          <p><span class="error"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <select name="supplier">
+              <% for (const sup of suppliers) { %>
+                <option value="<%= sup['Supplier_id'] %>" <% if (sup['Supplier_id'] == order['Supplier_id']) { %> selected <% } %>><%= sup['Supplier_name'] %></option>
+              <% } %>
+            </select>
+            <span>Supplier:</span>
+          </label>
+          <p><span class="error"></span></p>
+          <p><span class="hint">Click here to <a href="/suppliers/add">add supplier</a></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <button class="button">Submit</button>
+        </div>
+      </div>
+		</form>
+	</div>
+</main>
+<%- include('partials/footer') %>
