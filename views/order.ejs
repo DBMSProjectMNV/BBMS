@@ -4,7 +4,25 @@
 <main>
   <div class="container-flex">
     <h2>Orders</h2>
-    <div class="orders-container">
+    <div class="alerts-container">
+      <% if (locals.error) { %>
+        <% for (const message of error) { %>
+          <div class="alert error">
+            <p><%= message %></p>
+            <button type="button" class="btn-close"></button>
+          </div>
+        <% } %>
+      <% } %>
+      <% if (locals.success) { %>
+        <% for (const message of success) { %>
+          <div class="alert success">
+            <p><%= message %></p>
+            <button type="button" class="btn-close"></button>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
+    <div>
       <h3>Pending</h3>
       <% if (pending.length == 0) { %>
         <p>Empty</p>

@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { checkLogin } from '../middlewares/auth.js';
 import Order from '../models/order.model.js';
 import Supplier from '../models/supplier.model.js';
+import validator from '../middlewares/validators/order.js';
 const router = Router();
 
 router.get(
@@ -13,6 +14,8 @@ router.get(
     const cancelled = await Order.cancelled(req.user.rid);
     const suppliers = await Supplier.findAll(req.user.rid);
     const supmap = new Map();
+    res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success');
     for (const sup of suppliers) {
       supmap.set(sup['Supplier_id'], sup['Supplier_name']);
     }
@@ -38,6 +41,7 @@ router.get(
 router.post(
   '/orders/edit',
   checkLogin,
+  validator,
   async (req, res, next) => {
     if (req.query.id !== req.body.id) {
       return next({
@@ -49,7 +53,7 @@ router.post(
     const order = {
       'Retailer_id': req.user.rid,
       'Supplier_id': req.body.supplier,
-      'Medicine_name': req.body.medname,
+      'Medicine_name': req.body.name,
       'Quantity': req.body.quantity,
       'MRP': req.body.mrp,
       'Order_date': req.body.ordate
@@ -63,7 +67,7 @@ router.post(
 router.get('/orders/add', checkLogin, async (req, res) => {
   const fields = [
     'supplier',
-    'medname',
+    'name',
     'quantity',
     'mrp',
     'ordate'
@@ -76,11 +80,11 @@ router.get('/orders/add', checkLogin, async (req, res) => {
   res.render('order.add.ejs', { suppliers });
 });
 
-router.post('/orders/add', checkLogin, async (req, res) => {
+router.post('/orders/add', checkLogin, validator, async (req, res) => {
   const order = {
     'Retailer_id': req.user.rid,
     'Supplier_id': req.body.supplier,
-    'Medicine_name': req.body.medname,
+    'Medicine_name': req.body.name,
     'Quantity': req.body.quantity,
     'MRP': req.body.mrp,
     'Order_date': req.body.ordate,
@@ -90,9 +94,8 @@ router.post('/orders/add', checkLogin, async (req, res) => {
 });
 
 router.post('/orders/finish', checkLogin, async (req, res, next) => {
-  const oids = await Order.findAll(req.user.rid);
-  const set = new Set(oids.map(order => order['Order_id']));
-  if (set.has(parseInt(req.query.id, 10))) {
+  const order = await Order.find(req.user.rid, req.query.id);
+  if (order) {
     await Order.finish(req.user.rid, req.query.id);
     req.flash('success', 'order completed and added to inventory successfully');
     res.redirect('/orders/');
@@ -102,9 +105,8 @@ router.post('/orders/finish', checkLogin, async (req, res, next) => {
 });
 
 router.post('/orders/cancel', checkLogin, async (req, res, next) => {
-  const rows = (await Order.findAll(req.user.rid));
-  const oids = rows.map(order => order['Order_id']);
-  if (oids.includes(parseInt(req.query.id, 10))) {
+  const order = await Order.find(req.user.rid, req.query.id);
+  if (order) {
     await Order.cancel(req.user.rid, req.query.id);
     req.flash('success', 'order cancelled');
     res.redirect('/orders/');
