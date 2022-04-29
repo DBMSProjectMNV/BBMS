@@ -130,23 +130,6 @@ button {
 .field .button {
   margin: 0.5em;
 }
-.btn-close {
-  border: 0;
-  position: absolute;
-  top: 0.5rem;
-  right: 0;
-  z-index: 2;
-  padding: 1.25rem 1rem;
-  width: 1em;
-  height: 1em;
-  color: #000;
-  background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
-  border-radius: .25rem;
-  opacity: .5;
-}
-.btn-close:hover {
-  opacity: 1;
-}
 label i {
   display: inline-block;
   width: 2em;
@@ -182,25 +165,4 @@ i.eye-slash {
 }
 i.edit {
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuMS4xIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIyIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMzYyLjcgMTkuMzJDMzg3LjctNS42NzggNDI4LjMtNS42NzggNDUzLjMgMTkuMzJMNDkyLjcgNTguNzVDNTE3LjcgODMuNzQgNTE3LjcgMTI0LjMgNDkyLjcgMTQ5LjNMNDQ0LjMgMTk3LjdMMzE0LjMgNjcuNzJMMzYyLjcgMTkuMzJ6TTQyMS43IDIyMC4zTDE4OC41IDQ1My40QzE3OC4xIDQ2My44IDE2NS4yIDQ3MS41IDE1MS4xIDQ3NS42TDMwLjc3IDUxMUMyMi4zNSA1MTMuNSAxMy4yNCA1MTEuMiA3LjAzIDUwNC4xQy44MTk4IDQ5OC44LTEuNTAyIDQ4OS43IC45NzYgNDgxLjJMMzYuMzcgMzYwLjlDNDAuNTMgMzQ2LjggNDguMTYgMzMzLjkgNTguNTcgMzIzLjVMMjkxLjcgOTAuMzRMNDIxLjcgMjIwLjN6Ii8+PC9zdmc+")
-}
-.alert {
-  padding: 0.3rem;
-  padding-right: 2rem;
-  position: relative;
-  text-align: center;
-  width: 80%;
-  margin: 0 auto;
-  margin-bottom: 1rem;
-  border-radius: 0.5rem;
-  transition: opacity .15s linear;
-}
-.alert.error {
-  color: #842029;
-  background-color: #f8d7da;
-  border: 1px solid #f5c2c7;
-}
-.alert.success {
-  color: #0f5132;
-  background-color: #d1e7dd;
-  border-color: #badbcc;
 }

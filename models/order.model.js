@@ -1,4 +1,5 @@
 import db from './db.js';
+import Inventory from './inventory.model.js';
 
 /* Schema
 Retailer_id : string
@@ -62,9 +63,93 @@ const add = async order => {
   }
 };
 
+const finish = async (rid, oid) => {
+  const sql = `
+    UPDATE Orders
+    SET Order_status = "COMPLETED"
+    WHERE Retailer_id = ? AND Order_id = ?
+  `;
+  try {
+    const [result] = await db.query(sql, [rid, oid]);
+    if (result.affectedRows === 1) {
+      const order = await find(rid, oid);
+      const obj = {
+        'Retailer_id': order['Retailer_id'],
+        'Medicine_name': order['Medicine_name'],
+        'MRP': order.MRP,
+        'Stock': order.Quantity
+      };
+      const med = await Inventory.find(rid, order['Medicine_name']);
+      if (med) {
+        obj.Stock += med.Stock;
+        await Inventory.save(rid, order['Medicine_name'], obj);
+      } else {
+        await Inventory.add(obj);
+      }
+    }
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+const cancel = async (rid, oid) => {
+  const sql = `
+    UPDATE Orders
+    SET Order_status = "CANCELLED"
+    WHERE Retailer_id = ? AND Order_id = ?
+  `;
+  try {
+    await db.query(sql, [rid, oid]);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+const pending = async rid => {
+  const sql = `
+    SELECT * FROM Orders
+    WHERE Retailer_id = ? AND Order_status = "PENDING"
+  `;
+  try {
+    const [rows] = await db.query(sql, [rid]);
+    return rows;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+const completed = async rid => {
+  const sql = `
+    SELECT * FROM Orders
+    WHERE Retailer_id = ? AND Order_status = "COMPLETED"
+  `;
+  try {
+    const [rows] = await db.query(sql, [rid]);
+    return rows;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+const cancelled = async rid => {
+  const sql = `
+    SELECT * FROM Orders
+    WHERE Retailer_id = ? AND Order_status = "CANCELLED"
+  `;
+  try {
+    const [rows] = await db.query(sql, [rid]);
+    return rows;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export default {
   findAll,
   find,
   save,
+  finish,
+  cancel,
+  pending,
+  cancelled,
+  completed,
   add
 };

@@ -8,13 +8,15 @@ router.get(
   '/orders/',
   checkLogin,
   async (req, res) => {
-    const orders = await Order.findAll(req.user.rid);
+    const pending = await Order.pending(req.user.rid);
+    const completed = await Order.completed(req.user.rid);
+    const cancelled = await Order.cancelled(req.user.rid);
     const suppliers = await Supplier.findAll(req.user.rid);
     const supmap = new Map();
     for (const sup of suppliers) {
       supmap.set(sup['Supplier_id'], sup['Supplier_name']);
     }
-    res.render('order.ejs', { orders, supmap });
+    res.render('order.ejs', { pending, completed, cancelled, supmap });
   }
 );
 
@@ -85,6 +87,30 @@ router.post('/orders/add', checkLogin, async (req, res) => {
   };
   await Order.add(order);
   res.redirect('/orders');
+});
+
+router.post('/orders/finish', checkLogin, async (req, res, next) => {
+  const oids = await Order.findAll(req.user.rid);
+  const set = new Set(oids.map(order => order['Order_id']));
+  if (set.has(parseInt(req.query.id, 10))) {
+    await Order.finish(req.user.rid, req.query.id);
+    req.flash('success', 'order completed and added to inventory successfully');
+    res.redirect('/orders/');
+  } else {
+    next();
+  }
+});
+
+router.post('/orders/cancel', checkLogin, async (req, res, next) => {
+  const rows = (await Order.findAll(req.user.rid));
+  const oids = rows.map(order => order['Order_id']);
+  if (oids.includes(parseInt(req.query.id, 10))) {
+    await Order.cancel(req.user.rid, req.query.id);
+    req.flash('success', 'order cancelled');
+    res.redirect('/orders/');
+  } else {
+    next();
+  }
 });
 
 export default router;
