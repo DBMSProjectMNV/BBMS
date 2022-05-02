@@ -1,2 +1,68 @@
 </head>
+
 <body>
+
+  <!-- ======= Top Bar ======= -->
+<div id="topbar" class="d-flex align-items-center fixed-top">
+  <div class="container d-flex social-links justify-content-center align-items-center">
+    <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+  </div>
+</div>
+</div>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+<div class="container d-flex align-items-center">
+
+  <h1 class="logo me-auto"><a href="index.html">Medilab</a></h1>
+
+  <nav id="navbar" class="navbar order-lg-0">
+    <ul>
+      <li><a class="nav-link" href="/">Home</a></li>
+      <% if (!locals.user) { %>
+        <li><a href="/auth/login">Login</a></li>
+        <li><a href="/auth/register">Signup</a></li>
+      <% } %>
+      <li><a class="nav-link" href="/all">Shops</a></li>
+      <li><a class="nav-link scrollto" href="#about">About</a></li>
+      <li><a class="nav-link" href="#contact">Contact</a></li>
+    </ul>
+    <i class="bi bi-list mobile-nav-toggle"></i>
+    <div class="dropdown user">
+      <button class="user-icon" type="button"><i class="bi bi-person-fill"></i></button>
+      <ul>
+        <% if (locals.user) { %>
+          <h6 class="center">First name</h6>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/profile">My Profile</a></li>
+        <% } else { %>
+          <li><a href="/auth/login">Login</a></li>
+          <li><a href="/auth/register">Sign up</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
+
+</div>
+</header><!-- End Header -->
+<div id="main">
+
+  <!-- ======= Breadcrumbs Section ======= -->
+  <section class="breadcrumbs">
+    <div class="container">
+
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>Inner Page</h2>
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li>Inner Page</li>
+        </ol>
+      </div>
+
+    </div>
+  </section><!-- End Breadcrumbs Section -->
+
+  <section class="inner-page container">

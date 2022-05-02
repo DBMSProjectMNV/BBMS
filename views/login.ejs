@@ -15,17 +15,17 @@
       <div>
         <% if (locals.error) { %>
           <% for (const message of error) { %>
-            <div class="alert error">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
               <p><%= message %></p>
-              <button type="button" class="btn-close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
           <% } %>
         <% } %>
         <% if (locals.success) { %>
           <% for (const message of success) { %>
-            <div class="alert success">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
               <p><%= message %></p>
-              <button type="button" class="btn-close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
           <% } %>
         <% } %>
@@ -52,7 +52,7 @@
         </div>
       </div>
       <div>
-        <div class="center"><a class="toggleForm" href="#forgot">Forgot Password</a></div>
+        <div class="center"><a class="toggleForm scrollto" href="#forgot">Forgot Password</a></div>
       </div>
       <div>
         <div class="center">New user? <a href="/auth/register">Sign up</a></div>
@@ -88,7 +88,7 @@
         </div>
       </div>
       <div>
-        <div class="center"><a class="toggleForm" href="#login">Login</a></div>
+        <div class="center"><a class="toggleForm scrollto" href="#login">Login</a></div>
       </div>
       <div>
         <div class="field">

@@ -2,11 +2,14 @@
 <title>Error (<%= locals.code ?? 500 %>) <%= locals.desc ?? 'Internal server error' %></title>
 <%- include('partials/layout'); %>
 <main>
-  <h2><%= desc %></h2>
-  <div>
+  <h2 class="center"><%= desc %></h2>
+  <div class="container center">
+    <img src="/assets/img/500.svg" alt="" width="720" class="img-fluid">
+  </div>
+  <div class="container center">
       <p><a href="#!"><%= url; %></a></p>
-      <p>Error code: <%= code; %></p>
-      <p>Description: <%= desc; %></p>
+      <p class="lead"><strong>Error code: </strong><%= code; %></p>
+      <p><strong>Description: </strong><%= desc; %></p>
   </div>
   <% if (locals.stack) { %>
     <div class="stack">

@@ -40,11 +40,11 @@
                 <li><span>Order date: </span><span><%= order['Order_date'].toDateString() %></span></li>
               </ul>
               <p class="row">
-                <a href="/orders/edit?id=<%= order['Order_id'] %>" class="button small">Edit</a>
+                <a href="/orders/edit?id=<%= order['Order_id'] %>" class="button small col-4">Edit</a>
               </p>
               <p class="row">
-                <button type="button" class="btn-finish button small" data-oid="<%= order['Order_id'] %>">Complete</button>
-                <button type="button" class="btn-cancel button small" data-oid="<%= order['Order_id'] %>">Cancel</button>
+                <button type="button" class="btn-finish button small col" data-oid="<%= order['Order_id'] %>">Complete</button>
+                <button type="button" class="btn-cancel button small col" data-oid="<%= order['Order_id'] %>">Cancel</button>
               </p>
             </div>
           </div>
