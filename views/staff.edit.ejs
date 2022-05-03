@@ -3,6 +3,21 @@
 	<link rel="stylesheet" href="/css/forms.css" />
 	<script src="/js/forms.js" defer></script>
 <%- include('partials/layout'); %>
+<!-- ======= Breadcrumbs Section ======= -->
+<section class="breadcrumbs">
+  <div class="container">
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Edit staff</h2>
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/staffs">Staffs</a></li>
+        <li>Edit staff</li>
+      </ol>
+    </div>
+
+  </div>
+</section><!-- End Breadcrumbs Section -->
 <main>
 	<div class="form-container">
     <form action="/staffs/edit?id=<%= staff['Staff_id'] %>" method="post" class="big">
