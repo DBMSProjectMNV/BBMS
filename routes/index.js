@@ -8,6 +8,12 @@ import inventory from './inventory.js';
 import order from './order.js';
 const router = Router();
 
+router.use((req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.locals.user = req.user;
+  }
+  next();
+});
 router.use(auth);
 router.use(protectd);
 router.use(profile);

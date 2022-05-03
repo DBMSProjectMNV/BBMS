@@ -1,5 +1,6 @@
 <%- include('partials/header'); %>
 <title>Orders</title>
+<script type="text/javascript" src="/js/alerts.js" defer></script>
 <%- include('partials/layout'); %>
 <!-- ======= Breadcrumbs Section ======= -->
 <section class="breadcrumbs">
@@ -90,14 +91,15 @@
               <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#cancel<%= i %>" aria-expanded="false" aria-controls="#cancel<%= i %>" id="heading<%= i %>">Order <%= i + 1 %></button>
             </p>
             <div class="accordion-collapse collapse" id="cancel<%= i %>" aria-labelledby="heading<%= i %>" data-bs-parent="#cancels">
-            <div class="accordion-body">
-              <ul class="dll">
-                <li><span>Supplier name: </span><span><%= supmap.get(order['Supplier_id']) %></span></li>
-                <li><span>Medicine: </span><span><%= order['Medicine_name'] %></span></li>
-                <li><span>Quantity: </span><span><%= order['Quantity'] %></span></li>
-                <li><span>Price: </span><span><%= order['MRP'] %></span></li>
-                <li><span>Order date: </span><span><%= order['Order_date'].toDateString() %></span></li>
-              </ul>
+              <div class="accordion-body">
+                <ul class="dll">
+                  <li><span>Supplier name: </span><span><%= supmap.get(order['Supplier_id']) %></span></li>
+                  <li><span>Medicine: </span><span><%= order['Medicine_name'] %></span></li>
+                  <li><span>Quantity: </span><span><%= order['Quantity'] %></span></li>
+                  <li><span>Price: </span><span><%= order['MRP'] %></span></li>
+                  <li><span>Order date: </span><span><%= order['Order_date'].toDateString() %></span></li>
+                </ul>
+              </div>
             </div>
           </div>
         <% } %>
@@ -108,52 +110,4 @@
     </div>
   </div>
 </main>
-<script type="text/javascript">
-const completes = document.querySelectorAll('.btn-finish');
-for (const btn of completes) {
-  btn.addEventListener('click', async function() {
-    const result = await fetch('/orders/finish?id=' + this.dataset.oid, { method: 'POST' });
-    if (result.ok) {
-      window.location.reload();
-    } else {
-      const alert = document.createElement('div');
-      alert.classList.add('alert', 'error');
-      alert.appendChild(document.createElement('p')).innerHTML =
-      'Error while completing the order';
-      const close = document.createElement('button');
-      close.type = 'button';
-      close.classList.add('btn-close');
-      close.addEventListener('click', function() {
-        this.parentElement.remove();
-      });
-      alert.appendChild(close);
-      const div = document.querySelector('.orders-container');
-      div.parentElement.insertBefore(alert, div);
-    }
-  });
-}
-const cancels = document.querySelectorAll('.btn-cancel');
-for (const btn of cancels) {
-  btn.addEventListener('click', async function() {
-    const result = await fetch('/orders/cancel?id=' + this.dataset.oid, { method: 'POST' });
-    if (result.ok) {
-      window.location.reload();
-    } else {
-      const alert = document.createElement('div');
-      alert.classList.add('alert', 'error');
-      alert.appendChild(document.createElement('p')).innerHTML =
-      'Error while canceling the order';
-      const close = document.createElement('button');
-      close.type = 'button';
-      close.classList.add('btn-close');
-      close.addEventListener('click', function() {
-        this.parentElement.remove();
-      });
-      alert.appendChild(close);
-      const div = document.querySelector('.orders-container');
-      div.parentElement.insertBefore(alert, div);
-    }
-  });
-}
-</script>
 <%- include('partials/footer') %>

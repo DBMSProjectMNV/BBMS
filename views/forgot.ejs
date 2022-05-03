@@ -24,15 +24,24 @@
     <form action="/auth/forgot" method="post">
       <input type="hidden" name="rid" value="<%= rid %>" />
       <div>
-        <h2 class="center error">Forgot password</h2>
+        <h2 class="center">Forgot password</h2>
       </div>
       <%- include('partials/alert') %>
       <div>
         <div class="field">
           <label>
-            <i class="eye suffix password"></i>
-            <input type="password" name="old" placeholder="Old password" maxlength="32" value="" />
-            <span>Old password:</span>
+            <textarea name="hintq" placeholder="Hint question" readonly><%= hintq %></textarea>
+            <span>Hint question:</span>
+          </label>
+          <p><span class="error"></span><span class="counter"></span></p>
+          <p><span class="hint"></span></p>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label>
+            <textarea name="answer" placeholder="Answer" maxlength="50"></textarea>
+            <span>Answer:</span>
           </label>
           <p><span class="error"></span><span class="counter"></span></p>
           <p><span class="hint"></span></p>

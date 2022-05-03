@@ -35,9 +35,10 @@
       <button class="user-icon" type="button"><i class="bi bi-person-fill"></i></button>
       <ul>
         <% if (locals.user) { %>
-          <h6 class="center">First name</h6>
+          <h6 class="center"><%= user.name.split(' ')[0].replace(/./, char => char.toUpperCase()) %></h6>
           <li><a href="/dashboard">Dashboard</a></li>
           <li><a href="/profile">My Profile</a></li>
+          <li><a href="/auth/logout">Logout</a></li>
         <% } else { %>
           <li><a href="/auth/login">Login</a></li>
           <li><a href="/auth/register">Sign up</a></li>

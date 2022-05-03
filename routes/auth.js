@@ -60,12 +60,12 @@ router.get('/auth/register', (req, res) => {
 });
 router.post('/auth/register', registerValidator, registerController);
 
-router.get(
+router.get('/auth/forgot', forgotControllerGET);
+router.post(
   '/auth/forgot',
   [answer, passwordGen('password'), resultGen(['answer', 'password'])],
-  forgotControllerGET
+  forgotControllerPOST
 );
-router.post('/auth/forgot', forgotControllerPOST);
 
 router.get('/auth/logout', (req, res) => {
   const successes = req.flash('success');

@@ -65,16 +65,7 @@
       <div>
         <h2 class="center">Forgot Password</h2>
       </div>
-      <div>
-        <% if (locals.error) { %>
-          <% for (const message of error) { %>
-            <div class="alert error">
-              <p><%= message %></p>
-              <button type="button" class="btn-close"></button>
-            </div>
-          <% } %>
-        <% } %>
-      </div>
+      <%- include('partials/alert') %>
       <div>
         <div class="field">
           <label>
