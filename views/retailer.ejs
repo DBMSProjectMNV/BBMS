@@ -1,0 +1,49 @@
+<%- include('partials/header'); %>
+<title>Shops</title>
+<%- include('partials/layout'); %>
+<!-- ======= Breadcrumbs Section ======= -->
+<section class="breadcrumbs">
+  <div class="container">
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Shops</h2>
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li>All shops</li>
+      </ol>
+    </div>
+
+  </div>
+</section><!-- End Breadcrumbs Section -->
+<main>
+  <div class="container-flex">
+    <h2>Shops</h2>
+    <%- include('partials/alert') %>
+    <div class="accordion" id="retailers">
+      <% for (let i = 0; i < retailers.length; i++) { const ret = retailers[i]; %>
+        <div class="accordion-item">
+          <p class="accordion-header" tabindex="0">
+            <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#ret<%= i %>" aria-expanded="false" aria-controls="#ret<%= i %>" id="heading<%= i %>"><%= ret['Retailer_name'] %></button>
+          </p>
+          <div class="accordion-collapse collapse" id="ret<%= i %>" aria-labelledby="heading<%= i %>" data-bs-parent="#retailers">
+            <div class="accordion-body">
+              <ul class="dll">
+                <li><span>Name: </span><span><%= ret['Retailer_name'] %></span></li>
+                <li><span>Contact: </span><span><%= ret['Retailer_contact'] %></span></li>
+                <li><span>Email: </span><span><%= ret['Retailer_email'] %></span></li>
+                <li><span>Address: </span><span><%= ret['Retailer_address'] %></span></li>
+              </ul>
+              <p class="row">
+                <a href="/profile?id=<%= ret['Retailer_id'] %>" class="button small col-7">View profile</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% } %>
+    </div>
+    <div class="row">
+      <a href="/auth/register" class="button">Signup</a>
+    </div>
+  </div>
+</main>
+<%- include('partials/footer') %>

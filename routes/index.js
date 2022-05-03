@@ -6,6 +6,7 @@ import staff from './staff.js';
 import supplier from './supplier.js';
 import inventory from './inventory.js';
 import order from './order.js';
+import retailer from './retailer.js';
 const router = Router();
 
 router.use((req, res, next) => {
@@ -21,5 +22,6 @@ router.use(staff);
 router.use(supplier);
 router.use(inventory);
 router.use(order);
+router.use(retailer);
 
 export default router;

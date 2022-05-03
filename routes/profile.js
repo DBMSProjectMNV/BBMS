@@ -5,6 +5,15 @@ import validator from '../middlewares/validators/retailer.js';
 const router = Router();
 
 const fields = ['name', 'contact', 'email', 'address'];
+router.get('/profile', async (req, res, next) => {
+  const ret = await Retailer.find(req.query.id);
+  if (ret) {
+    res.render('profile.ejs', { ret });
+  } else {
+    next();
+  }
+});
+
 router.get('/profile', (req, res) => {
   res.redirect('/profile/edit');
 });

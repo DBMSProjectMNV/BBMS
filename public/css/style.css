@@ -36,6 +36,7 @@ body {
 }
 .button.small {
   font-size: 0.9rem;
+  margin: 0.5em 1em;
 }
 .button:hover {
   outline: 1px solid #cbf;

@@ -35,6 +35,16 @@ const find = (value, by) => {
   return byId(value);
 };
 
+const findAll = async () => {
+  const sql = 'SELECT * FROM Retailers';
+  try {
+    const [rows] = await db.query(sql);
+    return rows;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 const save = async (rid, ret) => {
   const sql = 'UPDATE Retailers SET ? WHERE Retailer_id = ?';
   try {
@@ -71,6 +81,7 @@ const del = async rid => {
 
 export default {
   find,
+  findAll,
   save,
   add,
   del
