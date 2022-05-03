@@ -27,24 +27,7 @@
       <div>
         <h2 class="center">Login</h2>
       </div>
-      <div>
-        <% if (locals.error) { %>
-          <% for (const message of error) { %>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <p><%= message %></p>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          <% } %>
-        <% } %>
-        <% if (locals.success) { %>
-          <% for (const message of success) { %>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <p><%= message %></p>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          <% } %>
-        <% } %>
-      </div>
+      <%- include('partials/alert') %>
       <div>
         <div class="field">
           <label>

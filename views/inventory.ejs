@@ -18,20 +18,42 @@
 <main>
   <div class="container-flex">
     <h2>Inventory</h2>
-    <div class="accordion">
-      <% for (const med of medicines) { %>
-        <div class="collapse">
-          <p class="accordion-header" tabindex="0"><%= med['Medicine_name'] %></p>
-          <div class="accordion-body">
-            <ul class="dll">
-              <li><span>Name: </span><span><%= med['Medicine_name'] %></span></li>
-              <li><span>MRP: </span><span><%= med['MRP'] %></span></li>
-              <li><span>Stock: </span><span><%= med['Stock'] %></span></li>
-            </ul>
-            <p class="row">
-              <a href="/inventory/edit?name=<%= encodeURI(med['Medicine_name']) %>" class="button small col">Edit</a>
-              <a href="/inventory/delete?name=<%= encodeURI(med['Medicine_name']) %>" class="button small col">Delete</a>
-            </p>
+    <div>
+      <% if (locals.error) { %>
+        <% for (const message of error) { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p><%= message %></p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% } %>
+      <% } %>
+      <% if (locals.success) { %>
+        <% for (const message of success) { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p><%= message %></p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
+    <div class="accordion" id="meds">
+      <% for (let i = 0; i < medicines.length; i++) { const med = medicines[i]; %>
+        <div class="accordion-item">
+          <p class="accordion-header" tabindex="0">
+            <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#med<%= i %>" aria-expanded="false" aria-controls="#med<%= i %>" id="heading<%= i %>"><%= med['Medicine_name'] %></button>
+          </p>
+          <div class="accordion-collapse collapse" id="med<%= i %>" aria-labelledby="heading<%= i %>" data-bs-parent="#meds">
+            <div class="accordion-body">
+              <ul class="dll">
+                <li><span>Name: </span><span><%= med['Medicine_name'] %></span></li>
+                <li><span>MRP: </span><span><%= med['MRP'] %></span></li>
+                <li><span>Stock: </span><span><%= med['Stock'] %></span></li>
+              </ul>
+              <p class="row">
+                <a href="/inventory/edit?name=<%= encodeURI(med['Medicine_name']) %>" class="button small col">Edit</a>
+                <a href="/inventory/delete?name=<%= encodeURI(med['Medicine_name']) %>" class="button small col">Delete</a>
+              </p>
+            </div>
           </div>
         </div>
       <% } %>

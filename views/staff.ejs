@@ -18,6 +18,7 @@
 <main>
   <div class="container-flex">
     <h2>Staffs</h2>
+    <%- include('partials/alert') %>
     <div class="accordion" id="staffs">
       <% for (let i = 0; i < staffs.length; i++) { const staff = staffs[i]; %>
         <div class="accordion-item">
