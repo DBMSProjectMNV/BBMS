@@ -11,7 +11,6 @@
     <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
   </div>
 </div>
-</div>
 
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
@@ -23,10 +22,7 @@
     <ul>
       <li><a class="nav-link" href="/">Home</a></li>
       <% if (locals.user) { %>
-        <li><a href="/auth/inventory">Inventory</a></li>
-        <li><a href="/auth/suppliers">Suppliers</a></li>
-        <li><a href="/auth/staffs">Staffs</a></li>
-        <li><a href="/auth/orders">Orders</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
       <% } else { %>
         <li><a href="/auth/login">Login</a></li>
         <li><a href="/auth/register">Signup</a></li>
