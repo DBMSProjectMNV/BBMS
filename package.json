@@ -4,6 +4,9 @@
   "description": "a web based blood bank management system for ease of information access to the end user and a portal for communication between blood donors and blood banks",
   "main": "app.js",
   "type": "module",
+  "engines": {
+    "node": "16.13.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
