@@ -22,7 +22,12 @@
   <nav id="navbar" class="navbar order-lg-0">
     <ul>
       <li><a class="nav-link" href="/">Home</a></li>
-      <% if (!locals.user) { %>
+      <% if (locals.user) { %>
+        <li><a href="/auth/inventory">Inventory</a></li>
+        <li><a href="/auth/suppliers">Suppliers</a></li>
+        <li><a href="/auth/staffs">Staffs</a></li>
+        <li><a href="/auth/orders">Orders</a></li>
+      <% } else { %>
         <li><a href="/auth/login">Login</a></li>
         <li><a href="/auth/register">Signup</a></li>
       <% } %>

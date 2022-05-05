@@ -1,7 +1,7 @@
-CREATE DATABASE medstore;
+CREATE DATABASE IF NOT EXISTS medstore;
 use medstore;
 
-CREATE TABLE Retailers (
+CREATE TABLE IF NOT EXISTS Retailers (
 	Retailer_id varchar(10) PRIMARY KEY,
 	Retailer_name varchar(30),
 	Retailer_contact varchar(10),
@@ -9,8 +9,8 @@ CREATE TABLE Retailers (
 	Retailer_address varchar(80)
 );
 
-CREATE TABLE User_Accounts (
-	User_id int PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS User_Accounts (
+	User_id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	Password_hash binary(60),
 	Hint_question varchar(50),
 	Answer varchar(30),
@@ -21,7 +21,7 @@ CREATE TABLE User_Accounts (
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE Inventory (
+CREATE TABLE IF NOT EXISTS Inventory (
 	Retailer_id varchar(10),
 	Medicine_name varchar(50),
 	MRP int,
@@ -33,7 +33,7 @@ CREATE TABLE Inventory (
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE Suppliers (
+CREATE TABLE IF NOT EXISTS Suppliers (
 	Retailer_id varchar(10),
 	Supplier_id varchar(10),
 	Supplier_name varchar(30),
@@ -47,7 +47,7 @@ CREATE TABLE Suppliers (
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE Orders (
+CREATE TABLE IF NOT EXISTS Orders (
 	Retailer_id varchar(10),
 	Order_id int NOT NULL AUTO_INCREMENT,
 	Medicine_name varchar(50),
@@ -63,7 +63,7 @@ CREATE TABLE Orders (
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE Staffs (
+CREATE TABLE IF NOT EXISTS Staffs (
 	Retailer_id varchar(10),
 	Staff_id int,
 	Staff_name varchar(30),
@@ -79,6 +79,8 @@ CREATE TABLE Staffs (
 		ON UPDATE CASCADE
 );
 
+DELETE FROM Retailers;
+
 INSERT INTO Retailers VALUES
 ("101", "Vishal", "9909874532", "vishal@shop.com", "vishal's address"),
 ("102", "Ram", "9909874533", "ram@shop.com", "ram's address"),
@@ -93,10 +95,10 @@ INSERT INTO Staffs VALUES
 ("103", "2", "Manju", "9909904563", "manju@shop.com", "manju address", "Accountant", 42000),
 ("103", "3", "Vijay", "9909904564", "vijay@shop.com", "vijay address", "Finance", 22000);
 
-INSERT INTO User_Accounts(Password_hash, Hint_question, Answer, Retailer_id) VALUES
-("$2b$10$XEMYmyOaZtRwAQsBl8rVCekDA8i9IGYK0viBIK.KMBgfbrQtLyREe", "question", "answer", "101"), /* vishal123456 */
-("$2b$10$dKk4suD3BEpfnpUEByXJXu3KXQxG8YAM2WAPVr8qVws9RDNn1O2Ea", "question", "answer", "102"), /* ram123456 */
-("$2b$10$qUEaf8WTF6kEIKH2vDtrFeF3z7mR1r/VRIX5OlxLaV4teedlIoO4q", "question", "answer", "103"); /* shyam123456 */
+INSERT INTO User_Accounts VALUES
+(NULL, "$2b$10$XEMYmyOaZtRwAQsBl8rVCekDA8i9IGYK0viBIK.KMBgfbrQtLyREe", "question", "answer", "101"), /* vishal123456 */
+(NULL, "$2b$10$dKk4suD3BEpfnpUEByXJXu3KXQxG8YAM2WAPVr8qVws9RDNn1O2Ea", "question", "answer", "102"), /* ram123456 */
+(NULL, "$2b$10$qUEaf8WTF6kEIKH2vDtrFeF3z7mR1r/VRIX5OlxLaV4teedlIoO4q", "question", "answer", "103"); /* shyam123456 */
 
 INSERT INTO Suppliers VALUES
 ("101", "1", "Ashwin", "9871989945", "ashwin@shop.com", "ashwin address"),
@@ -110,7 +112,7 @@ INSERT INTO Inventory VALUES
 ("101","Paracetemol",100,5);
 
 INSERT INTO Orders VALUES
-("102", NULL, "meidicine", 43, 25, "2022/02/25", "1", "PENDING");
+("102", NULL, "dolo 640", 43, 25, "2022/02/25", "1", "PENDING");
 
 CREATE USER 'project'@'localhost' IDENTIFIED BY 'iampassword';
 GRANT SELECT, INSERT, UPDATE, DELETE ON medstore.* TO 'project'@'localhost';
