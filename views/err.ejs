@@ -20,11 +20,16 @@
   <div class="container center">
     <img src="/assets/img/500.svg" alt="" width="720" class="img-fluid">
   </div>
+  <p></p>
   <div class="container center">
-      <p><a href="#!"><%= url; %></a></p>
+      <p class="url"><a href="#!"><%= url %></a></p>
       <p class="lead"><strong>Error code: </strong><%= code; %></p>
       <p><strong>Description: </strong><%= desc; %></p>
+      <p><a href="/" class="btn btn-dark d-inline-flex align-items-center justify-content-evenly">
+        <i class="bi bi-arrow-left p-1"></i>Back to homepage
+      </a></p>
   </div>
+  <p></p>
   <% if (locals.stack) { %>
     <div class="stack">
       <p>Stack trace:</p>

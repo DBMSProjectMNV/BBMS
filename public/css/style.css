@@ -83,6 +83,27 @@ body {
 .footer-top strong {
   padding-right: 0.5rem;
 }
+#main #hero {
+  margin-bottom: 0;
+}
+#contact li i {
+  display: flex;
+  width: 2em;
+  height: 2em;
+  justify-content: center;
+  align-items: center;
+  color: #1977cc;
+  background-color: #d6e9fa;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  position: relative;
+  top: 50%;
+  transform: translateY(-20%);
+}
+#contact i:hover {
+  background-color: #1977cc;
+  color: #fff !important;
+}
 @media screen and (min-width: 576px) {
   .footer-contact {
     text-align: right;

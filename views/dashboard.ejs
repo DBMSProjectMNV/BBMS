@@ -15,18 +15,70 @@
 
   </div>
 </section><!-- End Breadcrumbs Section -->
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+  <div class="container">
+    <h1 class="text-start">Dashboard</h1>
+    <h2 class="text-start">Welcome back, <%= locals.name ?? 'user' %></h2>
+    <a href="#about" class="btn-get-started scrollto">Get Started</a>
+  </div>
+</section><!-- End Hero -->
+
 <main>
-  <p>Hello welcome to dashboard</p>
-  <p>You are <%= locals.name %></p>
-  <br />
-  <p>Link to home page: <a href="/">Home</a></p>
-  <p>Link to change password: <a href="/auth/change">Change password</a></p>
-  <p>Link to your profile: <a href="/profile/<%= locals.name %>">Profile</a></p>
-  <p>View your staffs: <a href="/staffs/">Staffs</a></p>
-  <p>View your suppliers: <a href="/suppliers/">Suppliers</a></p>
-  <p>View your inventory: <a href="/inventory/">Inventory</a></p>
-  <p>Manage orders: <a href="/orders/">Orders</a></p>
-  <p>404 page: <a href="/does/not/exist/">non-existent</a></p>
-  <p>Thank you visit again: <a href="/auth/logout">Logout</a></p>
+
+  <!-- ======= Services Section ======= -->
+  <section id="services" class="services">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Services</h2>
+        <p>Manage all these services at ease under a single platform.</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="icon-box">
+            <div class="icon"><i class="fas fa-heartbeat"></i></div>
+            <h4><a href="/staffs">Staffs</a></h4>
+            <p>Manage staffs, staff details and salaries or add new staff</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="fas fa-pills"></i></div>
+            <h4><a href="/suppliers">Suppliers</a></h4>
+            <p>Manage suppliers and their details. Add, remove or update supplier details</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+          <div class="icon-box">
+            <div class="icon"><i class="fas fa-hospital-user"></i></div>
+            <h4><a href="/inventory">Inventory</a></h4>
+            <p>Manage medicines stock and sales. Add, update or remove medicines from the application</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+          <div class="icon-box">
+            <div class="icon"><i class="fas fa-dna"></i></div>
+            <h4><a href="">Orders</a></h4>
+            <p>Place or cancel orders for medicine. In case of order completion, inventory is automatically updated</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+          <div class="icon-box">
+            <div class="icon"><i class="fas fa-wheelchair"></i></div>
+            <h4><a href="">Profile</a></h4>
+            <p>Update profile or edit your details. Manage account details or change password here</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Services Section -->
 </main>
 <%- include('partials/footer') %>
