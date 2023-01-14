@@ -1,10 +1,23 @@
-# BBMS: blood bank management system
+# Medilab
 
-## AIM
-To make a blood bank database, and to make a web application to interact with this database.
+Welcome to Medilab. This is a Centralized medical store Management application
 
-## INTRODUCTION:
-To increase the efficiency of blood management in a highly populated country like India, searching and filtering information about various blood banks should be efficient.
+# why
 
-## DESCRIPTION:
-This project is a web based system that aims to provide easy access to information such as location of nearest blood banks, availability of blood in the blood banks, events like blood donation drives, awareness campaigns, etc. With this system, donors can check their blood donation records, and can book appointments at the center of their convenience. This system would also allow a blood bank to request blood from other blood banks.
+Medilab can register to the website and can store the information such as medicine
+stock, earning, staff information and supplier details of a medical store.
+With this system, retailer can keep a track of their sales and can efficiently
+order medicines on the basis of sale of specific medicine. This also allows retailer
+to keep a record of current stock of each medicine.
+
+# what
+Features of medilab app:
+- **Staffs and suppliers**:
+  Manage staffs and suppliers details. Add, remove or update staff and supplier details
+- **Stock and inventory**:
+  Manage medicines stock and sales. Add, update or remove medicines from the application
+- **Orders**:
+  Place or cancel orders for medicine. In case of order completion, inventory is
+  automatically updated
+- **Secure authentication**:
+  Secure login and register for retailers. Profile view and update options available
